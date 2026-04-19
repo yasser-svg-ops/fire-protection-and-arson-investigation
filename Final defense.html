@@ -1,0 +1,3144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bureau of Fire Protection</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red: #c0392b;
+      --dark-red: #96281b;
+      --orange: #e67e22;
+      --dark: #1a1a1a;
+      --gray: #f5f5f5;
+      --text: #333;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      background: #222;
+      color: #ccc;
+      font-size: 12px;
+      padding: 6px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .topbar a { color: #ccc; text-decoration: none; }
+
+    /* ── HEADER ── */
+    header {
+      background: #fff;
+      padding: 14px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .logo-area { display: flex; align-items: center; gap: 14px; }
+    .logo-area img { height: 60px; width: 60px; object-fit: contain; }
+    .logo-area .brand-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 28px;
+      color: var(--red);
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .logo-area .brand-name span { color: #333; }
+    .hotline {
+      text-align: right;
+      font-family: 'Oswald', sans-serif;
+    }
+    .hotline small { font-size: 12px; color: #888; display: block; }
+    .hotline .number { font-size: 38px; color: var(--red); font-weight: 700; line-height: 1; }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--red);
+      padding: 0 40px;
+      display: flex;
+      gap: 0;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 14px 22px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 15px;
+      letter-spacing: 0.5px;
+      transition: background 0.2s;
+      display: block;
+    }
+    nav a:hover, nav a.active { background: var(--dark-red); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      height: 480px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      padding: 0 60px;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('C:/Users/Yasser M. Sumignan/OneDrive/Documentos/Fire Website/212344.jpg');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.55);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 560px;
+      animation: fadeUp 0.9s ease both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-content h1 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 46px;
+      color: #fff;
+      line-height: 1.15;
+      font-weight: 700;
+      margin-bottom: 16px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+    .hero-content p {
+      color: rgba(255,255,255,0.88);
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+    .btn-learn {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      padding: 13px 32px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 16px;
+      letter-spacing: 1px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 100%, 0 100%);
+    }
+    .btn-learn:hover { background: var(--dark-red); transform: translateX(4px); }
+
+    /* ── CARDS SECTION ── */
+    .cards-section {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+    .card {
+      position: relative;
+      overflow: hidden;
+      height: 240px;
+      cursor: pointer;
+    }
+    .card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .card:hover img { transform: scale(1.07); }
+    .card-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 60%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+      transition: background 0.3s;
+    }
+    .card:hover .card-overlay { background: linear-gradient(to top, rgba(192,57,43,0.82) 0%, transparent 60%); }
+    .card-overlay h3 {
+      font-family: 'Oswald', sans-serif;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .card-overlay p {
+      color: rgba(255,255,255,0.82);
+      font-size: 13px;
+      margin-top: 6px;
+    }
+
+    /* ── MODAL / LEARN MORE SECTION ── */
+    .modal-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      z-index: 2000;
+      background: rgba(0,0,0,0.5);
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .modal-overlay.active { display: block; }
+
+    .modal-panel {
+      position: absolute;
+      top: 0; right: 0;
+      width: min(680px, 100vw);
+      height: 100vh;
+      overflow-y: auto;
+      background-image: url('C:/Users/Yasser M. Sumignan/OneDrive/Documentos/Fire Website/fire-department-with-firefighters-extinguishing-house-forest-and-helping-people-in-various-situations-in-flat-hand-drawn-cartoon-illustration-vector.jpg');
+      background-size: cover;
+      background-position: center top;
+      background-attachment: local;
+      animation: slideIn 0.4s cubic-bezier(0.22,1,0.36,1);
+    }
+    @keyframes slideIn {
+      from { transform: translateX(100%); }
+      to   { transform: translateX(0); }
+    }
+    .modal-inner {
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(6px);
+      min-height: 100%;
+      padding: 40px 36px 60px;
+    }
+    .modal-close {
+      float: right;
+      background: var(--red);
+      color: #fff;
+      border: none;
+      width: 36px; height: 36px;
+      font-size: 20px;
+      cursor: pointer;
+      border-radius: 4px;
+      line-height: 36px;
+      text-align: center;
+      transition: background 0.2s;
+    }
+    .modal-close:hover { background: var(--dark-red); }
+    .modal-inner h2 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 30px;
+      color: var(--red);
+      margin-bottom: 6px;
+      margin-top: 10px;
+    }
+    .modal-inner .divider {
+      width: 50px; height: 4px;
+      background: var(--red);
+      margin-bottom: 20px;
+    }
+
+    /* Editable content blocks */
+    .content-block {
+      margin-bottom: 28px;
+      padding: 20px;
+      background: rgba(255,255,255,0.75);
+      border-left: 4px solid var(--red);
+      border-radius: 0 6px 6px 0;
+    }
+    .content-block h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 20px;
+      color: var(--dark-red);
+      margin-bottom: 10px;
+    }
+    .content-block p {
+      font-size: 14px;
+      line-height: 1.75;
+      color: #444;
+    }
+    /* Make content blocks editable on click */
+    .content-block[contenteditable="true"] {
+      outline: 2px dashed var(--orange);
+      cursor: text;
+    }
+    .edit-hint {
+      font-size: 12px;
+      color: #888;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #222;
+      color: #aaa;
+      text-align: center;
+      padding: 18px;
+      font-size: 13px;
+    }
+    footer span { color: var(--red); }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo-area">
+      <img src="C:/Users/Yasser M. Sumignan/OneDrive/Documentos/Fire Website/Bureau_of_Fire_Protection.png" alt="BFP Logo" />
+      <div class="brand-name">FIRE <span>PROTECTION AND ARSON INVESTIGATION</span></div>
+    </div>
+    <div class="hotline">
+    </div>
+  </header>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <a href="#" class="active">Home</a>
+    <a href="#">About</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <h1>
+Criminology Educational Website focused on Safety, Prevention, and Investigation</h1>
+      <p>
+        CDI 6 - FIRE PROTECTION AND ARSON INVESTIGATION
+      </p>
+      <button class="btn-learn" onclick="openModal()">&#9658; Learn More</button>
+    </div>
+  </section>
+
+  <!-- 3 CARDS -->
+  <section class="cards-section">
+    <div class="card">
+      <img src="C:/Users/Yasser M. Sumignan/OneDrive/Documentos/Fire Website/54553ab1a6212.jpg" alt="Fire Response" />
+      <div class="card-overlay">
+        <h3>Fire Scene Investigation</h3>
+      </div>
+    </div>
+    <div class="card">
+      <img src="C:/Users/Yasser M. Sumignan/OneDrive/Documentos/Fire Website/arson-fire-investigation-1024x498.jpg" alt="Fire Investigation" />
+      <div class="card-overlay">
+        <h3>Fire Fighting</h3>
+      </div>
+    </div>
+    <div class="card">
+      <img src="C:/Users/Yasser M. Sumignan/OneDrive/Documentos/Fire Website/inve-1024x1024.jpg" alt="Community Safety" />
+      <div class="card-overlay">
+        <h3>Arson Investigation</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL / LEARN MORE PANEL -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+    <div class="modal-panel" id="modalPanel">
+      <div class="modal-inner">
+        <button class="modal-close" onclick="closeModal()">✕</button>
+        <h2>FIRE PROTECTION AND ARSON INVESTIGATION</h2>
+        <div class="divider"></div>
+
+          <h3></h3>
+          <p>
+           <p>Criminology Educational Website</p>
+          <p>
+</h1>
+
+<nav>
+
+  <a href="#home">Home</a>
+  <a href="#about">About</a>
+  <a href="#learnings">Learnings</a>
+  <a href="#trivia">Trivia</a>
+  <a href="#contact">Contact</a>
+ 
+</nav>
+
+<section id="home">
+
+   <h2>Home</h2>
+
+    <p>
+    Fire Protection and Arson Investigation is an important subject in criminology
+    that focuses on the prevention of fires, the protection of lives and property,
+    and the investigation of fire incidents. Fire can cause serious damage to
+    homes, buildings, and the environment, which is why proper fire safety
+    knowledge is important for everyone.
+    </p>
+
+    <p>
+    Fire protection involves safety equipment and systems designed to prevent
+    or reduce fire damage. Arson investigation focuses on identifying whether
+    a fire was accidental or intentionally set.
+
+    </p>
+
+
+    <p>
+    Through proper training, fire investigators analyze evidence and burn
+    patterns to determine the cause and origin of fires.
+   </p>
+
+</section>
+
+
+<section id="about">
+
+   <h2>ABOUT THE SUBJECT</h2>
+   
+   <p>
+    Fire Protection and Arson Investigation is the study of fire safety,fire prevention,
+    and the investigation of fire incidents.it helps criminology students understand fire behavior, 
+    fire fire hazards, and the proper methods used by investigators to determine the cause of fire.
+   </p>
+
+   <p>
+    The subject also teaches the important of fire saefty laws and the role of fire investigators in 
+    protecting lives and property.
+   </p>
+
+    
+</section>
+
+
+<section id="learnings">
+
+<h2>Learnings</h2>
+
+<h3>1st Prelim</h3>
+
+<ul>
+  
+
+   <h2>Lesson 1.1 - THEORIES OF COMBUSTION</h2>
+
+  
+
+    <p>Fire is useful in man's existence in planet Earth. One cannot imagine living in an environment without fire! Man needs fire to keep him warm, 
+      to enable him to cook his food, and many other things that need the benefits afforded by fire. Yet, fire has also become a threat to life and property.</p>
+
+
+
+   <p>Combustion, fire, and flame have been observed and speculated about from earliest times. Every civilization has had its own explanation for them. 
+      The Greeks interpreted combustion in terms of philosophical doctrines, one of which was that a certain "inflammable principle" was contained in all 
+      combustible bodies and this principle escaped when the body was burned to react with air.</p>
+  
+ 
+
+  <p>1. Fire Triangle Theory - three elements necessary to create/ produced fire in equal proportion.</p> 
+       <li>Fire Triangle</li>
+       <li>Oxygen</li>
+       <li>Fuel</li>
+       <li>Heat</li>
+    
+ 
+
+  <p>2. Fire Tetrahedron Theory - the fourth element of fire known as the "Chemical Chain Reaction."</p>
+       <li>OXYGEN</li>
+       <li>HEAT</li>
+       <li>REACTION</li>
+       <li>FUEL</li>
+    
+ 
+
+  <p>3. Life Cycle of Fire Theory - stages/steps wherein fire is created.</p> 
+       <li>[Image of a graph showing Fire Growth, Fuel Controlled, and Decay over time]</li>
+
+   
+   
+
+   <h2>THREE ELEMENTS OF FIRE:</h2>
+    
+   
+    
+    <p>
+     1. FUEL (reducing agent) - refers to any material that can be oxidized or a reducing agent which has a reference to 
+       a fuel's ability to reduce an oxidizing agent.
+    </p>    
+     
+   
+
+
+    <p>
+     2. OXYGEN (oxidizing agent) - explains how some materials can burn in an oxygen-free 
+      atmosphere.
+    <p/>
+    
+  
+    <p>
+    3. HEAT (temperature) - Heat is a type of energy in disorder while temperature is a measure of the degree of that disorder.
+    </p> 
+
+
+   
+     <p>
+       CHEMICAL CHAIN REACTION - refers to the vapors of gases distilled during the process of burning of materials carried into the flame. 
+       These vapors contain unchanged atoms and molecules having electrical charge which attract or repel other particles.
+     </p>
+
+
+
+    <p>
+      Pyrolysis is a process of chemically decomposing organic materials at elevated temperatures in the absence of oxygen.
+      It simultaneously involves the change of physical phase and chemical composition and is an irreversible process. 
+      The word pyrolysis is coined from Greek words "pyro" which means fire and "lysis" which means separating.
+    </p>
+ 
+
+   
+    <h2>Common Sources of Heat</h2>
+
+
+
+    <h2>Types of Energy</h2>
+
+
+
+    <p>
+     1.Chemical Energy – the most common source of heat in combustion reactions. 
+     Chemical energy is the potential of a chemical substance to undergo a chemical reaction to transform into other substances.
+    </p>
+
+
+
+    <p>
+     2.Electrical Energy – an energy developed when electrons flow through a conductor. 
+     Electrical energy is energy derived from electric potential energy or kinetic energy. 
+     When used loosely, electrical energy refers to energy that has been converted from electric potential energy.
+    </p>
+
+
+  
+   <p> 
+    3.Nuclear Energy – an energy generated when atoms either split apart (fission) or combine (fusion). 
+     Nuclear power plants generate power as a result of the fission.
+   </p> 
+
+
+
+  <p>  
+   4.Mechanical Energy – an energy created by friction and compress.
+  </p>
+  <p>   
+    Heat of friction – the movement of two surfaces against each other. This movement produced sparks being generated.
+  </p>
+  <p>   
+    Heat of compression – heat is generated when a gas is compressed in a container or cylinder.
+   </p>
+    
+  <h2>Energy exist in two types:</h2>
+
+
+    
+    <p>
+      Potential Energy – an energy possessed by an object that can be released in the future.
+    </p>
+ 
+
+   
+    <p>
+      Kinetic Energy – an energy possessed by a moving object.
+    </p>
+   
+
+
+    <p>
+     Heat – an energy that is transferred between two objects of differing temperature such as sun and the earth.
+    </p>  
+
+
+
+   <p>   
+     Light – a visible radiation created at the atomic level such as flame produced during combustion.
+   </p>   
+  
+
+
+     <h2>COMBUSTION or BURNING</h2> 
+    
+
+    
+     <p>    
+        a self-sustaining chemical reaction producing energy or products that cause more
+        reactions of the same kind. It is an exothermic reaction.
+     </p>
+
+
+
+     <p>
+       FIRE – it is a rapid, self-sustaining oxidation process accompanied by the release of heat and light of different intensities.
+      </p>
+
+
+
+    <h2>PRODUCTS OF COMBUSTION</h2>
+ 
+
+  
+    <p> 
+      1.Fire Gases – chemical composition of the fuel, percent of oxygen present, and the temperature of the fire.
+    </p>
+
+
+    
+    <h2>Types of Poisonous Gases:</h2>
+   
+
+    <p>
+      Hydrogen Sulfide (H2S) – a fire gas formed during fires involving organic material containing sulfur, such as: rubber, hair, wood, meat and hides.
+    </p> 
+
+
+
+    <p>
+      Hydrogen Cyanide (HCN) – a toxic fire gas found in oxygen-starved fires involving nitrogen-containing materials such as: 
+      wool, silk, urethane, polyimides, and acrylics.
+    </p>  
+
+
+
+    <p>
+      Hydrogen Chloride (HCL) – a gas which can be fatal after only a few breaths, is 
+      produced in fires involving chloride-containing plastic.
+    </p>
+
+
+
+
+
+    <p>
+      2.Flame– a visible (light-emitting) part of a fire. It is caused by a highly exothermic reaction
+     (for example, combustion, a self-sustaining oxidation reaction) taking place in a thin zone. If a fire is hot enough to ionize the gaseous 
+      components, it can become a plasma.
+    </p>
+    
+
+
+    
+    <h2>Types of Flames:</h2>
+   
+
+    
+     <li>A. According to Color and Completeness of Combustions</li>
+      
+
+
+
+     <p>
+      Luminous flame – a reddish-orange in color; it deposits soot because it is a product of incomplete combustion; it has lower temperature.
+      Non-Luminous flame – bluish in color; it does not deposit soot because it is a product of complete combustion; it has a higher temperature than luminous flame.
+     </p>  
+
+
+    
+   <h2>B. According to Burning Fuel and Air Mixture:</h2>
+ 
+
+     
+    <p>
+      Premixed flame – example of a Bunsen burner
+    </p>
+   <p> 
+      Diffusion flame – example of flame of the oxyacetylene torch (diffused-dispersed; widely spread)
+    </p> 
+
+    
+
+     <h2>C. Based on Smoothness:</h2>
+    
+
+  
+    <p>
+      Laminar flame – (smooth flame) flame is laminar when a particle follows a smooth path through a gaseous flame.
+    </p>
+   <p> 
+     Turbulent flame – (rough flame) those having unsteady, irregular swirls and eddies.
+    </p>
+  <p>  
+     Heat – a form of energy generated by the transmission of some other form of energy.
+    </p>
+  <p>  
+     Smoke – a visible product of incomplete combustion, a mixture of oxygen, nitrogen, CO, CO2 and finely divided particles released from the burning material.
+   </p>
+    
+
+
+    <li>CLASSIFICATION OF FIRE</li>
+    <li>A. BASED ON CAUSE: 
+    <li>✓ Natural fire</li>
+
+
+
+    <li>✓ Accidental fire</li>
+    <li>✓ Intentional fire</li>
+
+
+
+    <h2>B. BASED ON BURNING FUEL</h2>
+    <li>Four (4) Classes of Fire</li>
+    
+
+
+      <p>
+      ✓ Class A: Ordinary solid combustibles such as paper, wood, cloth and some plastics.
+      </p> 
+ 
+
+
+      <p>
+      ✓ Class B: Flammable liquids such as alcohol, ether, oil, gasoline and grease, which are best extinguished by smothering.
+      </p>
+
+
+
+      <p>
+      ✓ Class C: Electrical equipment, appliances and wiring in which the use of a nonconductive extinguishing agent prevents 
+        injury from electrical shock. Don’t use water.
+      </p>  
+
+
+
+      <p>
+      ✓ Class D: Certain flammable metallic substances such as sodium and potassium. These materials are normally not found in the Medical Center. 
+      </p>
+    
+
+
+    <h2>Classification of Fire Extinguishers:</h2>
+  
+
+
+    <p>
+      Fire extinguishers are classified as types A, ABC, BC or K.
+      It is important to use the right type of extinguisher on the specific 
+      class of fire to avoid personal injury or damage to property. 
+   </p>  
+
+
+
+   <p>
+      The wrong type of extinguisher could cause electrical shock, explosion, or spread the fire.
+      Portable extinguishers are useful for putting out small fires; however they are not effective against large, spreading fires. 
+      In these situations, doors should be closed to contain the fire.
+    </p>
+   
+
+
+    <h2>Types of Fire Extinguishers:</h2>
+   
+
+ 
+    <p>
+     ✓ Type A: Pressurized water to be used on Class A fire only. Do not use on Class B or C fires; may cause fire spread or electrical shock.
+    </p>
+  
+
+
+    <p>
+    ✓ Type ABC: Dry chemical effective on all classes of fires
+    </p>
+
+
+    <p>
+     ✓ Type BC: Carbon dioxide to be used on chemical or electrical fires
+    </p>
+
+
+    <p>
+     ✓ Type K: Used in kitchens on grease fires
+    </p>
+    
+
+   <h2>Types of Heat Transmission:</h2>
+    
+
+
+    <p>
+      Conduction – the transfer of heat or electric current from one substance to another by direct contact.
+      Convection – the transfer of heat through a fluid (liquid or gas) caused by molecular motion.
+      Radiation – energy that is radiated or transmitted in the form of rays or waves or particles.
+      Flame Contact – heat may be conducted from one body to another by direct flame contact.
+    <p/> 
+
+
+
+   <p>
+      ❖ Intensity of Fire – how hot the fire is burning.
+   </p>  
+   <p>
+      ❖ Explosive limits – the amount (expressed in percent) of fuel vapour that can be mixed with air to form an explosive or flammable mixture.
+   </p>  
+   <p>   
+      ❖ Magnitude of fire – size of fire and it is governed by the surface area of fuel exposed to the air.
+   </p>
+   <p>
+      ❖ Fire point – the temperature at which the material will give off ample vapors to keep burning.
+    </p>  
+   <p>  
+      ❖ Ignition Temperature – is the degree of heat necessary to ignite flammable vapours.
+   </p>  
+   <p>  
+      ❖ Oxidation – takes place by using the oxygen that is present in the atmosphere. However, in some cases, certain chemical
+         compounds known as oxidizing agents are involved.
+    </p>
+    
+  
+
+    <h2>Lesson 1.2 FIRE SUPPRESSION, CONTROL, EXTINGUISHMENT, AND EXTINGUISHING AGENTS</h2>
+    
+   
+
+    <p>
+      Fire Suppression – means slowing down the rate of burning, whereas, control means keeping the fire from spreading or
+      holding the fire to one area. Extinguishment is putting the fire completely out.
+    </p>
+    
+
+   
+    <h2>FOUR METHODS OF FIRE EXTINGUISHMENT AND HOW IT WORKS</h2>
+    
+
+    
+     <p>
+      Cooling – removal of heat (best cooling media is water)
+      Smothering – reducing % of oxygen or cutting off oxygen (blanketing, use foam)
+    </p>  
+
+
+    <p>
+      Separation/Starvation – removal of fuel or removal of combustible materials
+      Chemical Chain Reaction – known as the inhibition or the interruption of chemical reaction
+      Extinguishing Agents – the effectiveness of an extinguisher on a particular fire depends on the amount and type of agent in the extinguisher.
+     </p>
+    
+   
+
+   <h2>Different extinguishing agents:</h2>
+    
+
+   
+    
+      <p>a. Water extinguishers</p> 
+    
+
+ 
+     <p>                             
+      The superior cooling capacity of water over other extinguishing agents makes it particularly effective on fires involving ordinary 
+      combustibles such as wood, paper, fabrics, or rubber. Water extinguishers do not require extensive clean-up after use and they are 
+      noncorrosive to electronic circuitry, unlike dry chemical extinguishers. When water extinguishers are subject to freezing weather, antifreeze is added.
+     </p>  
+
+
+
+     <p>
+     b. CO₂ extinguishers – CO₂ is stored in extinguishers in the liquid phase. It vaporizes when released, thereby smothering a fire by excluding the air (oxygen) needed for combustion. CO₂ extinguishers are preferable to water or dry chemical extinguishers where water damage and fouling of delicate electrical, electronic, or laboratory equipment cannot be tolerated or where clean-up is a consideration.
+     </p>
+
+
+
+      <p>
+      c. Dry chemical extinguishers – Many types of dry chemical extinguishing agents are available. Those shown below are widely accepted in the process industries:
+      </p>
+   
+   
+
+     <p>
+      Sodium bicarbonate
+      Potassium bicarbonate base (purple K)
+      Monoammonium phosphate
+      d. Dry powder fire extinguishers – extinguish the fire primarily by interrupting the chemical reaction taking place and cutting off the oxygen supply. They can be used on fires involving solid combustibles, flammable liquids and electricity.
+     </p>
+     
+
+    
+     <h2>Lesson 1.3 FIRE EXTINGUISHERS</h2>
+
+
+     <p>
+      Fire Extinguisher is an active fire protection device used to extinguish or control small fires, often in emergency situations.
+      Steps in using portable Fire Extinguishers:
+     </p> 
+    
+
+     <p>
+      PULL – Pull the pin. This will also break the tamper seal.
+     <p>
+    </p>
+      AIM – Aim low, pointing the extinguisher nozzle (or its horn or hose) at the base of the fire.
+     <p>
+    </p>  
+      SQUEEZE – Squeeze the handle to release the extinguishing agent.
+      <p>
+    </p> 
+      SWEEP – Sweep from side to side at the base of the fire until it appears to be out.
+     </p>
+    
+
+     <h2>Lesson 1.4 CHARACTERISTICS OF FLAMMABLE MATERIALS</h2>
+   
+     <p>
+      Flammable Materials
+      Flammable and Combustible Liquids
+      Flammable and combustible liquids vaporize and form flammable mixtures with air when in open containers, when leaks occur, or when heated. 
+     </p>  
+
+
+     <p>    
+      To control these potential hazards, several properties of these materials, such as volatility, flashpoint, and flammable range and auto ignition
+      temperatures must be understood. Information on the properties of a specific liquid can be found in that liquid’s safety data sheet (SDS), or other
+      reference material.
+     </p>  
+
+
+     <p>
+      Flammable Aerosols
+      Flammable liquids in pressurized containers may rupture and aerosolize when exposed to heat, creating a highly flammable vapor cloud.
+      As with flammable liquids, these should be stored in a flammable storage cabinet.
+     </p> 
+
+
+      <p>    
+      Flammable and Combustible Solids
+      Flammable solids often encountered in the laboratory include alkali metals, magnesium metal, metallic hydrides, some organometallic compounds, and sulfur. 
+      </p> 
+
+
+     <p>
+      Many flammable solids react with water and cannot be extinguished with conventional dry chemical or carbon dioxide extinguishers. See Anecdotes for 
+      descriptions of incidents involving such materials.
+      Catalyst Ignition
+      Some hydrogenated catalysts, such as palladium, platinum oxide, and Raney nickel, when recovered from hydrogenation reactions, may become saturated with hydrogen and present a fire or explosion hazard.
+     </p> 
+
+   
+    <p>
+      • Carefully filter the catalyst.
+     </p>
+    <p>  
+      • Do not allow the filter cake to become dry.
+     </p>
+   <p>  
+     • Place the funnel containing moist catalyst into a water bath immediately.
+      </p>
+   
+    
+
+   <li>Flammable Liquid PropertiesM</li>
+
+
+    
+     <p>
+      Volatility is the tendency or ability of a liquid to vaporize.
+     </p>   
+
+
+
+
+
+     <p>
+      vapor pressure is a measure of a liquid's volatility. A high vapor pressure usually is an indication of a volatile liquid, or one that readily vaporizes.
+      Boiling point is the temperature at which the vapor pressure equals atmospheric pressure, such that the pressure of the 
+      atmosphere can no longer hold the liquid in a liquid state and bubbles begin to form. In general, a low boiling point indicates a high vapor pressure 
+      and, possibly, an increased fire hazard.
+    </p>
+  
+
+
+
+
+
+     <p>
+      Flashpoint is the minimum temperature at which the vapor concentration near the surface of the liquid is high enough to form an ignitable mixture.
+      Any liquid with a flashpoint less than 100°F is considered to be a flammable liquid. A liquid with a flashpoint between 100°F and 200°F is combustible. 
+     </p>  
+
+
+
+
+
+
+     <p>
+      In general, the relative hazard of a flammable liquid increase as the flashpoint decreases.
+      Flammable range is the proportion of vapor to air mixture that is ignitable and is expressed in terms of percentage of vapor in air by volume. 
+      The flammable range is bounded by the Lower Flammable Limit (LFL) and the Upper Flammable Limit (UFL). The LFL is the minimum concentration of flammable 
+      liquid vapor in air that will support the propagation of flame, or spread of flame through the entire volume of vapor-air mixture, upon contact with an
+      ignition source. The UFL is the maximum concentration of vapor in air that will support the propagation of flame. It is important to note that vapor-air 
+      mixtures below the LFL may burn at the ignition source without propagating away from the point of ignition.
+    </p>
+
+
+
+
+
+
+
+    <p> 
+     Auto ignition temperature is the minimum temperature at which a vapor-air mixture will spontaneously ignite, without the necessity of a spark or flame.
+     Vapor density is a measure of a vapor's weight when compared to air. Air is assigned a value of 1. Heavier, or denser, vapors tend to sink to floor level
+     while lighter, less dense vapors tend to rise to ceiling level. This property must be taken into account when working with flammable or combustible liquids 
+     outside of fume hoods. Most flammable liquid vapors are heavier than air. These vapors can travel some distance and encounter ignition sources remote from 
+     the workstation.
+    </p>
+ 
+</ul> 
+    
+
+
+<h3>2nd Prelim</h3>
+   
+<ul>  
+  
+
+    <h2>Lesson 2.0-PRINCIPLES OF STRUCTURAL FIREFIGHTING</h2>
+
+
+    <p>
+     Firefighting is, has been and always will be one of the main objectives of fire protection. A well-equipped and well-trained fire department
+     provides a solid based upon which effective firefighting depends. The strategy and tactics used to suppress fire evolved from this base.
+    </p>
+     
+
+
+    <h2>STRUCTURAL FIRE FIGHTING:</h2>
+
+
+
+
+    <p>
+     1. Initial Procedures:
+     Sounding the Alarm – the crew member who discovers/receives the fire alarm must sound the alarm promptly.
+    </p>
+   
+ 
+
+
+    <p>
+     The crewman who sounds the alarm must be sure to give the exact location of the fire, information regarding the type of fire.
+     The exact location may indicate the need of fast and immediate response.
+    </p>
+    
+
+
+
+
+    <p>
+    2. Fire Fighting Procedures/Strategy:
+    a.Size up- a continuous assessment of a fire situation that begins when the alarm is received and lasts until the fire is out.
+    The evaluation and observation of the fire scene on the following:
+   </p> 
+
+
+
+
+   <p>
+     *Class of fire (what combustible materials are burning)
+   </p>
+   <p>
+     *The appropriate extinguishing agent to be used
+   </p>
+   <p>
+     *The appropriate method of attack
+   </p>
+   <p>
+     *How to prevent the extension of fire
+   </p>
+   <p> 
+     *The required manpower and firefighting assignment.
+   </p>
+
+
+
+  
+    <p>
+     b. Attack - The method of action to gain immediate control to prevent or minimize the extension of fire to exposures.
+     Methods of Attack:
+     Direct Method - the practice of applying water or another extinguishing agent directly onto the burning fuel source, 
+     aiming to cool it down and extinguish the fire at its origin.
+     Indirect Method - a firefighting strategy where water is directed towards the ceiling or walls above a fire instead of directly onto 
+     the flames, allowing the water to vaporize and cool the surrounding area, thereby extinguishing the fire by disrupting the heat and oxygen balance,
+     rather than the burning fuel source.
+    </p>
+    
+ 
+ 
+
+    <p>
+     c. Ventilation - the process of removing smoke, heat, and toxic gases from a burning building to improve visibility and air quality for
+     firefighters and people inside.
+   </p> 
+
+
+
+      <li>Types of ventilation:</li>
+        
+      
+    <p>
+     Vertical Ventilation - it involves cutting holes in a building’s roof to remove smoke and heat.
+     Horizontal Ventilation - a method of removing smoke, heat and toxic gases from a building through windows.
+     Mechanical/ forced Ventilation - the use of powered equipment like fans to actively move smoke and heat out of a burning building.
+     Combination of Vertical & Horizontal Ventilation - refers to the tactic of using both roof openings (vertical ventilation) and lower-level
+     openings like doors and window (horizontal ventilation) simultaneously to effectively remove smoke and heat from burning structure.
+    </p>   
+
+    
+    <p>       
+     d. Exposures – the risk of a fire spreading to an adjacent building or structure.
+    </p> 
+   
+ 
+    <p>
+     e. Extinguishment - An action/method performed by fire fighters in putting off the fire by means of extinguishing agent, such as; water, chemicals and foam.
+    </p> 
+
+    <p>
+     f. Rescue - the process of saving people trapped in a building or other structure during a fire.
+     </p>
+    
+
+     <p>
+      ■ Rails – The two lengthwise members of a trussed ladder beam which are connected by the gusset plates.
+     </p>
+
+     <p>
+      ■ Rungs – The cross members between the beam of the ladders, used as footrest in climbing.
+     </p>
+ 
+     <p>
+      ■ Safety shoe – A swivel type butt plate consisting of rubber tread and a spike. It may be used with either the rubber or the spiked end on the ground.
+     </p> 
+
+     <p>
+      ■ Solid beam Ladder – A ladder with beams of solid construction (see trussed ladder).
+     </p>
+
+    <p>
+      ■ Stops – A limiting device on extension ladders to prevent fly ladder from over extending out of the bed of the ladder.
+    </p>
+
+    <p>  
+       ■ Straight Ladder – A ladder with only one section.
+    </p>
+ 
+    <p>
+      ■ Tip or Top – The upper end of a ladder.
+    </p>
+
+    <p>
+      ■ Trussed Ladder – A ladder with beams of open construction consisting of rails and gusset plates.
+    </p>
+
+   <h2>TYPES OF CARRY OF LADDER</h2>
+   <li>One Man Carry</li>
+   <li>Two-Man Carry</li>
+   <li>Four Man Carry</li>
+   <li>Six Man Carry</li>
+
+   <h2>SAFETY PROCEDURE IN USING LADDERS</h2>
+   
+  
+    <p>
+     1. Inspect and test all ladders prior to placing in service.
+    </p>
+  
+    <p>
+     2. Perform a visual inspection before and after ladder usage.
+   </p>
+  
+    <p>
+     3. All department ground ladders must be service tested in accordance with National Fire Protection Association (NFPA). 
+    </p>
+   
+   
+
+   <h2>Lesson 2.1-PRINCIPLES OF STRUCTURAL FIREFIGHTING</h2>
+
+
+
+    <p> 
+      Firefighting is, has been and always will be one of the main objectives of fire protection. A well-equipped, and well-trained fire department provides a 
+      solid based upon which effective firefighting depends. The strategy and tactics used to suppress fire evolved from this base.
+   </p>
+
+
+   <h2>Lesson 2.2- LADDER OPERATIONS</h2>
+
+
+
+   <p>
+      Fire Ladder- A portable ladder used for escape from or access to the upper floors of a burning building. Devices designed to bring firemen and their 
+      equipment to the upper stories of buildings to fight fires and rescue people. The ladders may be portable or mounted on motor vehicles; fire escapes are
+      permanently mounted.
+   </p>
+
+
+  <h2>Lesson 2.3 – POST-EXTINGUISHMENT PROCEDURES</h2>
+  
+   
+    <p>
+    The post-extinguishment procedure involves a series of steps taken after a fire has been put out to ensure safety, assess damage, and 
+    begin the recovery process. Here’s a breakdown:
+    </p>
+
+ 
+   <p>   
+     1. Safety First:
+   </p>
+   <p> 
+     ✓ Ventilate the area: Open windows and doors to clear smoke and fumes.
+   </p>
+   <p> 
+     ✓ Check for hotspots: Use a thermal imaging camera to identify areas where embers may still be smoldering.
+    Evacuate the building: Ensure everyone is safely out of the building before proceeding.
+   </p>
+
+   <p>   
+    2. Damage Assessment:
+    Identify the source: Determine the cause of the fire to prevent future incidents.
+    Assess structural integrity: Check for damage to walls, ceilings, and foundations.
+    Inspect utilities: Make sure gas, electricity, and water lines are safe.
+   </p>
+
+ 
+  <p>   
+   3. Recovery and Cleanup:
+   Secure the property: Board up windows and doors to prevent theft or vandalism.
+   Remove debris: Clear away damaged furniture, belongings, and building materials.
+   Contact insurance: File a claim with your insurance provider.
+  </p>
+
+
+   <p>
+    4. Restoration and Reconstruction:
+    Hire contractors: Consult with qualified professionals for repairs and reconstruction.
+    Clean and sanitize: Thoroughly clean and disinfect the affected area.
+    Rebuild and restore: Repair or replace damaged structures and belongings.
+   </p>
+ 
+
+
+
+    <h2>Lesson 2.4 – BUILDING CODE & BUILDING REQUIREMENTS</h2>
+
+
+
+
+   <p>
+    Building Code – a standard rules for safety in the construction of buildings.
+    Building codes vary in their fire- resistance requirements in accordance with the occupancy classification.
+   </p>
+
+
+
+
+   <p>
+       Building Requirements: 
+       the specific details within the code that outline what needs to be done to comply with those standards,
+       including aspects like structural integrity, fire safety, accessibility, plumbing, and electrical systems, depending on the building type and location.
+    </p>
+
+
+    <p> 
+     ■ Wall-Pompier ladder – consists of a large goose-neck hook at the tip, with a single beam through which the rungs projects. 
+     It may be used to reach upper stories of tall buildings, beyond the reach of ground or aerial ladders.
+    </p>
+
+   <p>
+    ■ Aerial ladder – is a mechanical unit generally operated by hydraulic power is mounted upon a specially built chassis.
+      The source of power is usually derived from the apparatus engine which actuates a hydraulic hoist. It is constructed of metal & are trussed to 
+      provide adequate strength. It ranges from 65 – 100 feet.
+   </p>
+
+    <p>
+     ■ Tower ladder – apparatus combines some features of both aerial ladder equipment and elevating platforms. A telescopic boom has a ladder mounted on it, 
+       but the top working area is a partially enclosed platform. Various ground ladders are also carried.
+    </p>
+
+
+
+
+
+    <li>FORMS OF AERIAL LADDER</li>
+    <p>Hydraulic Aerial Ladders</p>
+    <p>Elevating platform (articulated boom)</p>
+
+
+
+
+
+     <h2>LADDER TERMINOLOGY</h2>
+ 
+
+
+
+   <p>
+    ■ Beam - the solid or trussed main structural side member of a ladder, supporting the rungs.
+   </p>
+   
+  <p>
+    ■ Bed Ladder/Bed Section – The lower section of an extension ladder into which the upper section retracts.
+  </p>
+
+  <p>
+    ■ Butt – the bottom or base end of a ladder.
+  </p>
+ 
+  <p>
+     ■Butt plates/Cleats/Spikes/Spurs/Shoes- The steel spikes mounted on the butts to provide a more secure base for the ladder on hard surfaces such as concrete.
+        They also serve as a protection against excessive wear on the ends of ladders.
+  </p>
+
+  <p>
+    ■ Combination Ladder – A versatile ladder that can serve as a straight ladder or be converted to an “A” type ladder: i.e. Metal Dou Safety “A” Ladder and Little Giant Ladders.
+  </p>
+
+  <p>
+    ■ Extension Ladder- A ladder with two sections that can be nested for ease of handling and extended for the needed height.
+  </p>
+
+  <p>
+    ■ Fly Ladder/Fly Section – The extendible top section of an extension ladder.
+  <p>
+
+  <p>
+    ■ Folding Ladder – A ladder designed for use in inaccessible areas where ordinary ladders will not fit: the rungs fold completely into the beams when fully closed.
+  </p>
+
+  <p>
+    ■ Guides/Channels – Light wood strips or metal channels which guide the fly ladder while it is being raised.
+  </p> 
+
+  <p>
+    ■ Gusset Plate – A flat metal plate used in truss constructed ladders, which connects the rails of the beam and supports the rungs.
+  </p> 
+
+  <p>
+    ■ Halyard – A rope used to elevate the fly section of an extension ladder.
+  </p>
+
+  <p>
+    ■ Hook Ladder/roof ladder – A ladder equipped with folding hooks at the top.
+  </p> 
+
+  <p> 
+    ■ Ladder Locks – A locking mechanism that secures an extension ladder in the desired extended position by engaging the beams of the fly ladder to the rungs of the bed of the ladder. It is also called dogs or pawl.
+  </p> 
+
+  <p>
+    ■ Latching Device – A device used on combination ladders to lock the ladder in position. This is consisting of hinges and pins.  
+  </p> 
+  
+  <p>
+    ■ Pulley – A grooved wheel attached to the bed ladder of an extension ladder through which the halyard is drawn.
+  </p>
+
+   <p>
+     g. Overhaul- searching a fire scene for hidden fires and ensuring that the fire is fully extinguished.
+   </p>
+   <p>
+     h. Salvage- the process of protecting property and belongings from damage caused by fire, water, and smoke.
+  </p>
+
+   <h2>The following are the other strategy used in Fire Fighting:</h2>
+
+    
+ 
+    <p>1. Locate the fire</p> 
+    <p>2. Confine the fire</p> 
+    <p>3. Extinguish the fire</p> 
+    <p>4. Exposures</p> 
+  
+ 
+   <p>
+    • Location – locating the fire a simple matter. In an open lumber yard where flames are reaching for the sky, it is simple matter. But finding or locating a fire in a room in a cellar of a three-story dormitory or building which is filled with dense smoke is not an easy task.
+   </p>
+   <p> 
+    • Confinement – confining the fire is the next step in strategy. Judgment, skill, and experience must be used to the utmost to determine whether or not the fire is to be routine or a disaster involved. Confining the fire simply means to restrict its spread to its point of origin or at least to the area involved.
+   </p>
+   <p>  
+    • Extinguishment – extinguishing the fire may take as little water as that use in a booster line, or it may take thousands of gallons played through heavy appliance. The decision rests upon the judgment, skill, training, and experience of the officer-in-charge.
+    </p>
+
+
+
+
+   <li>FORMS OF GROUND LADDER<li>
+
+
+
+   <p>
+     ■ Straight ladder – is nonadjustable in length & consist of only one section. This is sometimes called wall ladder, used for quick access to windows and rooftop one 7 two story buildings. This type is used in length of 12, 14, 16, 18, and 24 feet.
+   </p>
+   <p>
+     ■ Extension ladder – is adjustable in length, consisting two sections which travel in guide or brackets to permit length adjustment. This type provides access to windows and roofs within the limit of their extendable lengths. It is 24 to 65 feet in length. A baby Extension (Baby Bangor) is a 12 feet extension ladder without a halyard for raising the fly section.
+   </p>
+   <p> 
+     ■ Straight Hook ladder
+   </p>
+   <p> 
+     ■ Bangor ladder
+   </p>
+   <p> 
+     ■ Combination ladder – is adjustable in length and has a suitable means for unlocking the sections so that the two separate sections can form equal angles with the floor or ground as a stepladder.
+   </p>
+
+
+
+
+    <h2>STRUCTURAL FIRE FIGHTING:</h2>
+
+
+
+
+    <p>
+       1. Initial Procedures:
+       Sounding the Alarm – the crew member who discovers/receives the fire alarm must sound the alarm promptly.
+    </p>
+   <p>   
+      *The crewman who sounds the alarm must be sure to give the exact location of the fire, information regarding the type of fire.
+       The exact location may indicate the need of fast and immediate response.
+     </p>  
+
+    <p>
+      2. Fire Fighting Procedures/Strategy:
+     <p>
+    </p>  
+      a. Size up- a continuous assessment of a fire situation that begins when the alarm is received and lasts until the fire is out.
+     </p>   
+
+     <p>  
+       The evaluation and observation of the fire scene on the following:
+     </p>
+    <p> 
+      *Class of fire (what combustible materials are burning)
+     </p>
+    <p>  
+      *The appropriate extinguishing agent to be used
+    </p>
+   <p>  
+      *The appropriate method of attack
+    </p>
+   <p>  
+      *How to prevent the extension of fire
+    </p>
+   <p>   
+      *The required manpower and firefighting assignment.
+     </p>
+     
+
+ 
+     <p>
+       b. Attack - The method of action to gain immediate control to prevent or minimize the extension of fire to exposures.
+       Methods of Attack:
+     </p>
+     <p> 
+       Direct Method - the practice of applying water or another extinguishing agent directly onto the burning fuel source, aiming to cool it down and extinguish the fire at its origin.
+       Indirect Method - a firefighting, strategy where water is directed towards the ceiling or walls above a fire instead of directly onto the flames, allowing the water to vaporize and cool the surrounding area, thereby extinguishing the fire by disrupting the heat and oxygen balance, rather than the burning fuel source.
+     </p> 
+
+
+
+      <p>
+        c. Ventilation- the process of removing smoke, heat, and toxic gases from a burning building to improve visibility and air quality for firefighters and people inside.
+        
+        <li>Types of ventilation:</li>
+       
+    
+     <p> 
+        Vertical Ventilation - it involves cutting holes in a building’s roof to remove smoke and heat.
+      </p>
+     <p>  
+        Horizontal Ventilation - a method of removing smoke, heat and toxic gases from a building through windows.
+     </p>
+     <p>   
+        Mechanical/ forced Ventilation - the use of powered equipment like fans to actively move smoke and heat out of a burning building.
+      </p>
+     <p>  
+        Combination of Vertical & Horizontal Ventilation - refers to the tactic of using both roof openings (vertical ventilation) and lower-level openings like doors and window (horizontal ventilation) simultaneously to effectively remove smoke and heat from burning structure.
+      </p>
+ 
+     <p>
+       d. Exposures – the risk of a fire spreading to an adjacent building or structure.
+     </p>
+    <p>   
+       e. Extinguishment- An action/method performed by fire fighters in putting off the fire by means of extinguishing agent, such as; water, chemicals and foam.
+     </p>
+    <p>   
+      f. Rescue- the process of saving people trapped in a building or other structure during a fire.
+    </p>
+
+</ul>
+
+
+
+
+
+<h3>Midterm</h3>
+   
+
+
+
+   <h2>Lesson 3.1 FIRE INVESTIGATION</h2>
+
+
+
+   <p>
+     Fire investigation is by nature the basis for fire prevention program. It is a systematic process of examining the actual scene and gathering information to
+    determine the origin, cause, and development. It involves analyzing burn patterns, fire spread, and location of potential sources, such as electrical outlets.
+   </p>
+   <p>  
+     It is also a complex and tedious methodical approach, combining scientific knowledge and logical sequence.
+  </p>
+ 
+  <p>
+    Note: The Purpose of Primary goal of Fire Investigation is to identify the cause of the fire.
+  </p>
+
+  <p>
+    The following are some of the favorite causes listed by firefighters when they are not certain of the actual cause:
+   </p>
+  <p> 
+    a. Faulty wiring
+  </p>
+  <p>
+    b. Children playing with matches
+  </p>
+  <p>
+    c. Spontaneous combustion
+   </p>
+  <p>
+    d. Spark from stove
+  </p>
+  <p> 
+    e. Burning rubbish
+  </p>
+  <p>
+    f. Careless disposal of smoking material
+  </p>
+   
+  <p>
+   As far as the investigation is concerned, they must be deemed as:
+   </p>
+  <p> 
+   Cause: that which made the fire start, and 
+  </p>
+  <p>
+   Reason: that which led to the cause of the fire. 
+  </p>
+  <p>
+   Both cause and reason must be established to satisfactorily complete a fire investigation. The “cause” explains the existence of fire, or the WHAT of investigation, while the “reason” establishes the WHY of the fire.
+  </p>
+
+  
+  <h2>Four General Classes of Fire Causes</h2>
+  
+  <p>
+   1.Natural Cause: Caused naturally, without human intervention or aid, such as by lightning.
+  </p>
+
+  <p>
+   2.Accidental Fire: accidental human action causes fire to start.
+  </p>
+
+  <p>
+   3.Arson: intentional and criminal human action causes fire to start.
+  </p>
+
+  <p>
+   4.Incendiary Fire: fire started by natural action wherein human employment is involved directly or indirectly.
+  </p> 
+
+
+
+   <p>
+    Such as lighting, electrical installation and smoking-related equipment. 
+   </p> 
+
+
+
+  <h2>Three General Fire Classification of Fire as to Cause</h2>
+   
+
+
+   <p>
+    1.Innocent Fire: natural and accidental causes
+   </p>
+
+   <p>   
+    2.Incendiary fire: intentionally caused, meaning someone deliberately ignited it under circumstances where they knew the fire shouldn’t be started. 
+   </p> 
+   <p>
+    3.Unknown Fire: fire of unknown causes. 
+  </p>  
+
+  
+    <h2>Persons Responsible to Examine and Inspect the Fire Scene</h2>
+   
+
+    <p>a. Fire Marshall</p>
+    <p>b. Fire Chief</p>
+    <p>c. Assistant Chief for Technical Service</p>
+    <p>d. Fire Inspector responsible for the specific building</p>
+    <p>e. Senior Fire Officer at the fire scene</p>
+    <p>f. Photographer</p>
+    <p>g. Utilities Personnel (particularly electrician)</p>
+   
+
+
+
+
+   <p>
+     The first individual to provide technical expertise for the investigation. The Senior Fire Officer from the fire incident is present to explain 
+     what was observed during the fire and to report on the mechanism or principles during the extinguishment of the fire. 
+   </p>    
+    
+ 
+
+
+   <p>
+      photographer provides complete coverage, beginning with pictures during the firefighting operation; including exterior, interior, 
+     special features, circumstances and the activities of the investigators at work.
+     • Utilities personnel provide technical assistance, particularly as to the condition of electrical circuits and appliances. 
+   </p>
+
+
+
+
+   <p> 
+      Fire Investigation and Evidence Kit:  
+      Evidence kit provides equipment for use in the investigation and for the preservation of any evidence found at the
+      scene after that evidence has been photograph in its original location.
+   </p> 
+
+
+
+
+   <p>
+    • Special clothing such as: coverall, gloves, boots used to protect uniform;
+   </p>
+  <p> 
+    • Flashlight and electric lantern;
+   </p>
+  <p>   
+    • Measuring tape and small ruler measurements; 
+   </p>
+  <p>  
+    • Labels (gummed and stringed) used to identify items;
+   </p>
+  <p> 
+    • New or sterile glass jars with rubber airtight seals used for the collection of samples;
+   </p>
+  <p> 
+    • Envelopes, boxes, plastic bags, metal cans used for the collection (assorted sizes) used for collection of samples. 
+  </p>  
+
+    
+     <h2>Basic Steps in a Fire Scene Examination:</h2>
+    
+
+  <p>
+    • Search systematically – make a plan, have in mind what you will look for, the way you will look, and what you will do with each item found and collected. Be thorough, complete, and orderly
+   </p>
+  <p> 
+    • Observe- Use your eyes, ears, nose, and camera if possible to note the conditions. Observe the fire and the spectators.
+   </p>
+  <p> 
+    • Take photograph- the camera records more details than the naked eye. Establish visual reference through numerous photographs. Photograph each area several times during the various phases of investigation. Infrared photography may prove extremely valuable since it is sensitive to differences in heat. 
+   </p>
+  <p> 
+    • Work by the Process of Elimination- establish a checklist and check off each item. Settle one item before attempting another if possible. Avoid backtracking.
+   </p>
+  <p> 
+    • Check and Verify - Do not assume or take for granted. Don't jump to conclusions.
+   </p>
+  <p> 
+    • Take Note - write down all the details 
+   </p>
+  <p>   
+     • Draw diagrams - Amplify notes with diagrams depicting locations of incidents described. 
+  </p>
+
+    
+    <li>Areas to Conduct Fire Investigation:</li>
+
+   <p>
+    1. Exterior - Determine where the fire vested first by comparing burn char, smoke, and heat patterns around windows, doors, and roof.  
+    Look for the following:  
+   </p> 
+    
+    <p>a. Exterior points of origin;</p>  
+    <p>b. unusual burn patterns of flammable liquid;</p>  
+    <p>c. Tools and flammable liquid containers;</p>  
+    <p>d. Footprints and scuff marks at suspected points of entry.</p>
+  
+
+   <p>
+    2. Interior - Conduct a cursory examination or general survey of the entire structure of interior for the extent of fire damage.
+    Establish the class of fire duration (brief or long) and the approximate burn time by checking the following;  
+   </p>
+
+    <p>a. Window glass condition;</p>  
+    <p>b. Depth of wood char, at or in close proximity to the point of origin;</p>  
+    <p>c. Penetration of fire restrictive wall coverings by fire;</p> 
+    <p>d. Electric clock that has been stopped by fire damage.</p>  
+    <p>e. Note the time stopped and compare with alarm time. The time factors should be estimated and considered as approximation only.</p>
+      
+
+  
+    <h2>Steps on How to Determine the Point of Origin:</h2>  
+  
+
+
+
+   </p>
+    a.Examine the entire interior of the building and determine which room or areas has received the most severe fire damage. 
+    Generally, this will be the area where the fire burned extensively or the longest and will very likely be where it originated.
+   </p>  
+
+
+
+   <p>  
+     b. Determine the level or origin within the room by examining and comparing the bottom side of the tables, shelves, and chairs.
+   </p>
+
+
+
+   <p>
+    c. Examine the ceiling and look for the following patterns: a) fire penetration and b) heaviest fire exposure
+   </p>
+
+
+ 
+  <p> 
+    d. Examine the light bulbs within the room. The side of the bulbs which is initially exposed to heat begin to swell or bulge and lose shape at about 900 degrees F when exposed to heat for 10 minutes or more actually point to the area of fire origin.
+  </p>   
+
+
+
+   <p>
+    e. Examine walls within the room and look for fire patterns or fire cones. Fires generally burn upward and outward, leaving corresponding fire patterns on wall as a result of heat transfer through convection and radiation. The steepness or relative pitch of the angle seen on the fire cone is indicative of the type of burning; e.g. Smoldering or Flaming.
+   </p>
+
+  
+
+
+    <li>3. Debris</li>
+    <p>Examine the fire debris and the floor in the following manner:</p>  
+    
+
+
+   <p>
+    a. Conduct a detailed search of the debris, examining it layer by layer until the floor is reached;  
+   </p> 
+
+
+
+  <p>
+   b. Completely clean the floor on all debris and char dust. The floor and floor covering should be clean enough to observe and photograph the significant burn and char patterns and should be dry  
+  </p>
+ 
+  <p>
+   c. Carefully reconstruct and replace furnishings and other articles in their original positions by using burn patterns and corresponding protected areas. During fire progress, legs and bases of furniture and other items on the floor will protect the floor, leaving unburned marks which will aid in repositioning.
+  </p>
+
+  <p>
+ 
+   4. Furnishing  
+    Examine fire damaged furnishing such as: upholstered furniture couches, chairs, beds, etc.
+  </p>
+
+  <p>
+    Two (2) General types of Burn Pattern  
+   </p>
+  <p> 
+   a. Burn pattern that involves a surface burning of the item. This pattern is indicative of the presence of a smoldering source of ignition. Examination of disclose that tension still exists.
+  </p>
+
+  <p>
+    b. Burn patterns involving deep penetration of one portion with corresponding collapse of springs and frame destruction. Spring collapse is caused when the heating process occurs over an extended length of time, causing the springs to lose their tension and collapses of their own weight.
+  </p>
+
+  
+   <li>Types of Furnishing</p>  
+   <p>a. Upholstered furniture;</p>  
+   <p>b. Television sets and table radios;</p>  
+   <p>c. Drapes and curtains;</p>  
+   <p>d. Kitchen range</p>
+  
+
+  
+   <h2>Fire Report (American Setting)</h2>  
+   
+  </p>
+   Fire reports of all fires, regardless of sizes, should completed without delay. This report be initiated and completed without delay. The contents of the fire report may contain the following information:  
+  </p>
+
+   <p>1. time of incident;</p>   
+   <p>2. location of incident;</p>    
+   <p>3. size and nature of fire</p> 
+   <p>4. fire involvement;</p>    
+   <p>5. fire department plan/ response;</p>   
+   <p>6. injuries and fatalities;</p>   
+   <p>7. time fire extinguished;</p>    
+   <p>8. most probable cause;</p>    
+   <p>9. Follow-up and corrective action required.</p>  
+ 
+
+    
+   <h2>Types of Fire/Arson Investigation</h2>  
+   <li>a. Basic Investigation</li>  
+   <li>Purposes:</li>  
+  <p>1. To determine what property was damage;</p>  
+  <p>2. What the causes and reasons were;</p>    
+  <p>3. The number and extent of injuries or fatalities:</p>   
+  <p>4. The recommended corrective actions to prevent to prevent recurrence</p>  
+ 
+
+ 
+  <h2>b. Technical Investigation</h2>  
+  
+  <p>
+  It is an in-depth investigation to determine more specific details of the cause and effects, and to establish necessary corrective action.
+  </p>
+
+  <li>Reasons in Conducting Technical Investigation</p>  
+  <p>1. There is suspicion of arson in connection with any fire;</p>   
+  <p>2. There is suspicion of negligence or violation of regulations;</p>   
+  <p>3. The cause of any fire is undetermined (to establish the most probable cause);</p>   
+  <p>4. There is evidence of negligence or mismanagement in the fire suppression or rescue operation,</p>  
+  <p>5. Loss of life or disabling as a result of fire.</p> 
+ 
+
+  
+   <li>c. Arson Investigation</li>  
+   
+   <p>
+    The direct result of the basic or technical investigation or it may be brought about from outside knowledge.
+   </p> 
+
+  
+   <li>Character Traits of Qualified Arson Investigator</li>  
+   <p>1. He should possess knowledge of investigative techniques;</p>   
+   <p>2. He should have an insight of human behavior;</p>   
+   <p>3. He should have a first-hand knowledge of the chemistry of fire and its behavior;</p>  
+   <p>4. He should be resourceful.</p> 
+  
+
+  
+   <h2>Lesson 3.2 – PHOTOGRAPHING THE FIRE SCENE</h2>	 
+   
+  <p>
+   It is normally impractical to take physical evidence from a fire scene to a court room so the investigator must rely on the use of
+   photographs to document much of the evidence and to support the observations, opinions and conclusions the investigator 
+   wishes to make as to the cause of the fire. As well as supporting the investigator’s conclusions, the photographs should also 
+   provide evidence which would counteract arguments of alternative causes of the fire which might be suggested at a later date.
+  </p>
+
+  <p>
+   Photographs are also useful for jogging the investigator’s memory at the time of writing the report or before appearing in court. 
+   Also, in extremely dark fire scenes the photographs could provide detail which may not be available using torch light.
+  </p>
+
+  <p>
+   A conclusion made by the investigator which is well supported by photographs can often lead to a guilty plea or, in a civil case, 
+   settlement of an issue without trial.
+  </p>
+
+  <p>
+   The photograph provides a pictorial representation which is easily understood and evaluated in the context of the average viewer's experience, 
+   as most people are able to interpret what they can see. In a report, the investigator should provide at least one or two photographs wherever possible to 
+   support each observation he or she wishes to state.
+  </p>
+ 
+  <p>
+   The photographs should be numbered and captioned and referred to as "Photograph 1, 2 etc."
+   A plan should also be made showing the view angles of each photograph or alternatively the photographs should be presented in a sequence 
+   which will provide some type of continuity to allow the reader to determine the view angle of each one.
+  </p>
+
+  <p>
+   In former times an investigator needed to have considerable photographic skills to produce quality evidence suitable for use in court. 
+   Producing photographs at a fire scene which is normally dark, drab and often dangerous was a difficult task as the photographer had to read 
+   and adjust the camera settings in torch light and if all went well the investigator found out several days after the inspection what technical 
+   aspect of the exercise had been overlooked.
+  </p>
+
+  
+   <h2>1. PHOTOGRAPHING THE EXTERIOR</h2>
+  
+ 
+  <p> 
+   Where to photograph and what to photograph?
+   The exterior of the building should be photographed  
+   a. From all sides or at least two opposite corners to show the overall degree of fire damage and the locations of the various entrances and windows.
+  </p>  
+
+  <p>
+   b. The location of the building to neighboring buildings or firefighting access areas should also be made apparent.
+ </p>
+
+  <p>
+  c. As well as any objects which may be material to the circumstances of the fire, such as the location of nearby power poles. The investigator may need to prove at a later date the fire had not spread from such an outside source.
+  </p>
+
+  <p>
+   d. Evidence of tire tracks, footprints and the location of explosion debris should also be photographed to show their relationship with the building and they should be photographed in close detail, as well as from a distance.
+  </p>
+ 
+  <p>
+  The exterior photographs generally show the nature and material of construction and the locations of the doors, windows, chimneys, flues,
+  electricity fuse box or gas meter. The openings where the fire vented are usually clearly shown in the exterior photographs.
+  </p>
+
+  <p>  
+   If the fire started inside a building near an exterior wall or in a roof cavity the area of fire origin can often be determined from
+   studying the heat or burn patterns on the exterior of the window frames, wall or roof. Exterior burn patterns are generally easier to interpret than the
+   equivalent interior burn pattern as they generally provide good color and texture contrast, and are less affected by smoke.
+  </p>
+
+  <p>
+   Panoramic views are valuable in reports as they provide in great detail an overall view of the scene. 
+   They can be produced by joining together a sequence of photographs or by using a wide angled lens or a disposable camera equipped with a wide angled lens.
+  </p>
+
+  <p>
+   The investigator should seriously consider carrying one in the car, as a sequence of panoramic photographs of a large fire scene significantly enhances a report.
+  </p>
+
+  <p>
+   Overhead shots of the fire scene should be taken if access can be made through the use of a ladder, cherry picker or a nearby building.
+   The overhead shot provides the viewer with an idea of the plan of the building and can be used as a reference by the viewer to determine the 
+   location of objects shown in later photographs. In large warehouse fires where the structure collapses sequentially as a response to the spread
+   </p>
+
+   <p>
+   of the fire, an overhead shot is invaluable for showing the manner in which the structural members have collapsed.
+   If photographs of the actual fire can be obtained from eyewitnesses or media sources then they should be included in the report.
+  </p>
+
+   
+    <h2>. PHOTOGRAPHING THE INTERIOR</h2>
+
+   <p>
+    Photographs of the interior of a building are generally more difficult for the viewer to interpret than the exterior photographs as 
+    the interior surfaces are usually burnt and covered with a layer of soot, and the viewer is generally unfamiliar with such an environment. 
+    A good quality flash unit is essential as the photographs need to provide as much detail as possible to allow the viewer to familiarize themselves with the
+    nature of the damage and possibly the identity and purpose of the room before the fire.
+   </p>
+  
+   
+    <h2>Where to photograph and what to photograph?</h2>  
+   
+   <p>
+    a. All rooms and areas inside the building affected by the fire should be photographed, and the photographs should be sequentially
+    presented in a report from the areas of least damage to the areas of greatest damage, or to the area of fire origin, if this is not the area of greatest damage.
+   </p>
+
+   <p>
+    b. Photographs of the peripheral areas where the fire had not originated should be presented and discussed first in a report so these areas can be eliminated from further discussion.
+   </p>
+   
+   <p>
+    c. When photographing each rooms the walls, ceilings and doorways should be shown and, unless a wide angled lens is used, several photographs of each room may be needed.
+   </p>
+
+   <p>
+    d. A prominent object such as a fireplace or a large appliance can be used as a reference point in sequential photographs to allow the viewer to maintain their perspective and their familiarization with the fire scene.
+   </p>
+
+   <p>
+    e. The area of fire origin should be photographed before excavation has commenced and again photographed during excavation, if the process has yielded points of interest. The floor should be cleaned so a photograph can be taken to show the nature of the flooring materials. If the floor has completely combusted and a nearby wall has survived then the original floor level can be marked on the wall through the use of a string and some chalk, and the chalk line photographed.
+   </p>
+
+   <p>
+    f. At areas where an accelerant is suspected the areas of localized damage to the floor as well as the overhead damage should be photographed. The amount of overhead damage should be well documented by photographs as the continued combustion at floor level of combustible materials which, have fallen from above could account for the localized damage at floor level. If debris samples are taken then the sample container should be numbered or labelled and the container photographed at the point of sampling.
+   </p>
+
+   <p>  
+    g. The burn patterns at doorways should be photographed to show the spread of the fire between rooms. The burn patterns on the walls in hallways normally show the room from which the fire originated and the direction of spread of the fire.
+   </p>
+
+   <p>
+    h. If appliances are suspected of causing the fire they should be photographed from a distance and in close up in the location where they were found, the remains should then be taken outside to allow closer inspection and so that they can be photographed in sunlight or later in the laboratory.
+   </p>
+
+   
+    <h2>3. POINTS OF ENTRY AND SECURITY OF BUILDING</h2>
+    
+   <p>
+    Fire Brigade personnel will usually give an account of the security of a building as they found it.
+    In many cases their accounts will need to be verified at each point of entry by an inspection of the burn patterns and soot deposits
+    to surfaces around the point of entry, and an examination for tool marks.
+   </p>
+
+   
+   <li>Where to photograph and what to photograph.></li>
+   
+   <p>
+    a. If possible the doors should be first photographed in the position in which they were found. If the door was found closed then both sides of the door should be photographed.
+  </p>
+
+  <p>
+   b. The burn patterns and soot deposits around the door and the door frame should be photographed as they normally ascertain the position of the door at the time of the fire.
+  </p>
+
+  <p>
+   c. Any parts of the door or lock which may have been dislodged as a result of some type of forced entry should be photographed at the location where they were found and later reconstructed at their original position. Photographs of the door jamb may also be vital.
+  </p>
+
+  <p>
+   On Windows
+   a. The position of the windows at the time of the fire should also be determined and the evidence used for such an evaluation should be photographed.
+  </p>
+
+  <p>
+   b. The position of the window frames and in the case of a sliding aluminum window,
+  </p>
+
+  <p>
+   c. The position of the falling glass could both indicate the position of the window at the time of the fire.
+  </p>
+
+  <p>
+   d. The smoke and heat patterns above a window can also indicate the position of the window at the time of the fire.
+  </p>
+
+  <p>
+   f. The window locks should also be recovered and photographed.
+  </p>
+
+  
+   <h2>4. CAR FIRES</h2>
+  
+
+  <p>  
+   If possible the remains of burnt cars should be photographed at the scene and the surrounding area should also be photographed. 
+   A fire where the car has burnt in an isolated area can usually be regarded as being deliberately lit. Conversely a fire where the car has burnt in view
+   of independent witnesses can normally be regarded as being accidental in nature. If the car has been transported to a wrecking yard then attempts should
+   be made to examine the original scene as evidence such as petrol trail residues or bonfires which were originally under the car can sometimes be found.
+  </p>
+
+  <p>
+    a.The exterior of the car should ideally be photographed from all sides and then again with the bonnet and doors opened. 
+    Cars generally have three compartments being the engine, passenger and boot compartments and all three compartments should be examined and photographed.
+  </p>
+
+  <p>
+   b.The engine and the underside of the bonnet should be photographed and parts such as the fuel line connection, air filter, carburettor, radiator and associated hoses, exhaust manifold, battery, terminals and electrical wiring looms photographed in detail. For comparison, a photograph of the same engine from an unburnt car can be shown next to that of the burnt engine and the major parts of the engine labelled.
+  </p>
+
+  <p>
+   c.A good overall view of the passenger compartment can normally be made by kneeling on the bonnet or the boot and photographing the seats, doors and dashboard. Such a photograph can often show the area of severest fire damage which is generally the area of fire origin as cars have a relatively uniform distribution of naturally available fuel such as plastics.
+  </p>
+  
+  <p>
+   d.The window winding mechanisms, window glass and the smoke deposits on the hinges can establish the status of the windows and doors at the time of the fire and should be photographed. Any damage which may indicate the car had been stolen should be photographed.
+  </p>
+  
+  <h2>Lesson 3.3 - THE LAWS ON ARSON</h2>
+
+  <p>
+   ARSON - it is a crime against property. The willful and malicious burning of another's property with intent to injure or defraud the insurer of that property.
+   The burning of all kinds of building, structures, aircraft, watercraft, crops, forest land and personal property.
+  </p>
+
+  <p>
+   What Constitute Arson?
+   <p>
+  </p> 
+   1. Burning- there must be burning or charring. 
+  </p>
+
+  <p>
+   2. Willfulness- the act was done purposely and with intention. 
+  </p>
+ 
+  <p>
+   3. Motive- the moving cause that induces the commission of the crime. 
+  </p> 
+  
+  <p>
+   4. Malice- it denotes hatred or a desire for revenge.
+  </p>
+ 
+  <p>
+   5. Intent- the purpose or design with which the act is done and involves the will to do the act. 
+  </p>
+
+    <p>
+     Corpus delicti- it is the fact that crime was committed.
+     Points of Origin of Fire- it is the particular place in the building were the fire started.
+     This may be obtained or established by an examination of witnesses by the arson investigator, by inspection of the debris at the fire scene, and
+     by studying the fingerprint of fire.
+    </p>
+
+  <p>
+     The Fingerprint of Fire- it occurs during the free-burning stage of the fire, or when it undergoes pyrolytic decomposition or heated gases move upward on
+     the walls leaving a burnt pattern.
+  </p>
+
+  
+   <li>Motive</li>  
+   <li>Fires are set by:</li>  
+   <p>1. Persons with motives</p>   
+  
+
+  <p>
+   • Those with desire to defraud the insurer    
+  </p>
+  <p>  
+   • Employees or such other person who has grievance   
+  </p>
+ <p>
+   • Those with desire to conceal evidence of crime   
+  </p>
+ <p> 
+   • Those who set fire for purposes of intimidation   
+   </p>
+
+  <p>
+   2. Person without motives  
+  </p>
+ <p>
+   • Those who are mentally ill  
+  </p>
+ <p> 
+   • Pathological fire-setters   
+  </p>
+ <p> 
+   • Pyromaniac  
+  </p>
+ <p> 
+   • Psychos   
+   </p>  
+
+  <p>
+   In determining motive, the arson investigator must concentrate on the three (3) major factors namely:  
+  </p> 
+
+   <p>1. Point of Origin</p>  
+   <p>2. Modus Operandi</p>  
+   <p>3. Beneficiaries</p> 
+   
+
+  
+   <li>Most common motives of arson</p>  
+   <p>1. Economic Gain (Defrauding the insurance company)</p>   
+   <p>2. Profit by the Perpetrator other than the Insured Person</p>  
+   <p>3. Concealment of crime</p>   
+   <p>4. Pyromania- the uncontrollable impulse of a person to burn anything without any motivation</p>   
+   
+  <p>
+   • Abnormal youth- Epileptics, imbeciles and morons  
+  </p>
+ <p>
+   • Hero type- a person responsible setting a building on fire and pretends to discover it, turn the alarm or make some rescue works to appear as "hero"   
+  </p>
+ <p> 
+   • Drug addicts and Alcoholics  
+  </p>
+ <p> 
+   • Sexual Deviates and Perverts Tell Tale Signs  
+  </p>
+ <p> 
+   These signs maybe obvious that the first fireman at the fire scene will suspect arson:
+  </p>
+
+  <p>
+   Burned Building- the type of building may indicate a set fire under certain circumstances.  
+  </p>
+ 
+  <p>
+   2. Separate Fires- when two or more fire breaks out within a building, the building is certainly suspicious.  
+  </p> 
+
+  <p>
+   3. Color of Smoke- the firefighter's first clue to the combustibles of the fire. 
+  </p>
+
+  
+   <li>Indication of Color of Smoke and Fire:</li>
+   <li>Color of Smoke</li>
+   <li>Black Smoke with deep red flame</li> 
+   <li>Heavy nrown with bright red flame</li> 
+   <li>White smoke wuth bright flame</li> 
+   <li>Black smoke with red and blue green flame</li> 
+   <li>Purple-violet flame</li> 
+   <li>Greenish-yellow flame</li> 
+   <li>Bright Reddish-yellow flame</li> 
+  
+
+  
+   <li>Material/Substance</li> 
+   <li>Petroleum product such as as Tar,Rubber.Plactics</li> 
+   <li>Nitrogen products</li> 
+   <li>Asphalt</li> 
+   <li>Potassium products</li> 
+   <li>Chloride or Manganese products</li> 
+   <li>Calcium products</li> 
+   
+
+  
+   <p>4. Smoke Marks</p>    
+   <p>5. Color of flame</p>   
+   <p>6. Size of Fire</p>    
+   <p>7. Direction of travel</p>   
+   <p>8. Intensity</p>    
+   <p>9. Odor</p>    
+   <p>10. Condition of content</p>   
+   <p>11. Doors and windows</p>    
+   <p>12. Other Suspicious Circumstances</p>  
+ 
+
+
+   <p>Lesson 3.4- The Legal Aspects of Arson/Fire Investigation</p>
+   
+  <p>
+   • It is the concern of the fire investigator to prove malicious intent of the offender. Intent must be proved, otherwise no crime exists. 
+  </p>
+ <p> 
+   • The law presumes that a fire is accidental, hence criminal designs must be shown. 
+  </p>
+ <p> 
+   • Fire caused by accident or criminal design must be shown
+  </p>
+ <p>
+   • Fire caused by accident or negligence does not constitute arson. 
+  </p>
+
+   
+    <li>Basis of Criminal Liability in Arson:</li>
+   
+  <p>
+   • Kind and character of the building burned; 
+  </p>
+ <p> 
+   • Location of the building; 
+  </p>
+ <p>
+   • Extent of value of the damage; 
+  </p>
+ <p> 
+   • Whether inhabited or not 
+  </p>
+
+  <p>
+    Previously, arson was defined and penalized under nine (9) different articles of the Revised Penal Code:
+   </p>
+  <p> 
+    • Article 320 (Destructive Arson)
+   </p>
+  <p> 
+    • Article 321 (other forms of arson) 
+   </p>
+  <p> 
+    • Article 322 (cases of arson not included in the preceding articles) 
+   </p>
+  <p> 
+    • Article 323 (arson of property of small value) 
+  </p>
+ <p> 
+    • Article 324 (crimes involving destruction) 
+  </p>
+ <p> 
+    • Article 325 (burning one's own property to commit arson) 
+   </p>
+ <p>
+    • Article 326 (setting fire to property exclusively owned by the offender)   Article 326-a (in cases where death resulted as a consequence of arson)  
+   </p>
+ <p>
+   • Article 326-b (prima facie evidence of arson)
+   </p>
+  
+   <p>
+    RA 9514- The “Revised Fire Code of the Philippines of 2008” this code aims to promote economic development through the Prevention and Suppression of all kinds 
+    of destructive fires and to boost the fire service as a profession.
+   </p>
+
+   <p>
+     On March 7, 1979, citing certain inadequacies that impede the successful enforcement and prosecution of arsonists, then President Ferdinand E. Marcos issued presidential Decree No. 1613. (P.D. 1613 supplanted the penal code provisions on arson)
+   </p>
+   <p> 
+     On November 11, 1980, the law on arson was again revisited via P.D. No. 1744. The new law expanded the definition of destructive arson by way of reinstating Article 320 of the Revised Penal Code. The amendatory legislation also paved the way for the reimposition of the capital punishment on destructive arsonists.
+  </p>
+ 
+  <p>
+    When Republic Act (R.A.) No. 7659 (An Act to Impose the Death Penalty on Certain Heinous Crimes) was passed on December 13, 1993, Article 320 again underwent a revision.
+  </p>
+   
+  <p>
+    With the repeal of the Death Penalty Law on June 24, 2006 through R.A. No. 9346, arson is no longer a capital offense.
+  </p>
+
+</ul>
+
+<h3>Semifinals</h3>
+
+    <h2>LESSON 1. LEGAL REQUIREMENTS IN PRESERVING PHYSICAL EVIDENCE IN ARSON</h2>
+
+   <p>
+    A. Admissibility of the Object or Substance: It requires full accounting of the object or substance from the scene of the fire to the court.
+   </p>
+ 
+   
+   <li>B.Admissibility of the results of Laboratory Examinations:</li> 
+   <p>1.Qualification of Technician</p>  
+   <p>2.Safeguarding of the samples during analysis</p>  
+   <p>3.Result of the examination</p>  
+   <p>C.Interpretations of the Findings (to be made in non-technical language)</p> 
+  
+
+  
+   <li>D. Interview and Interrogation:<li>
+   
+  <p>
+   1. Time and Place of questioning
+  </p>
+
+  <p>
+   2. Interviews of firemen, neighbors, person who discovered the fire, insurance agent, insured person and other person who has direct connection regarding the burned property.
+  </p>
+
+  <p>
+   3. Interrogation
+  </p>
+
+   <li>Proof of the existence of the fire</li> 
+   <li>To establish jurisdiction of the court.</li> 
+   <li>Corpus Deliction</li>  
+   <li>Proof for incendiary origin of the fire</li>  
+   <li>Proof of the guilt of accused.</li>  
+  
+
+  
+   <li>E. Searching for Evidence:</li>
+   
+   <p>
+    The safest procedure is for the investigator to start at the top of the heap and carefully removing the objects one by one, laying them aside until reaching the bottom where he will find the "pot of gold", the evidence.
+   </p>
+
+  <p>
+   Steps in Tracing the Origin of Fire and Searching for Evidence
+  </p> 
+
+  <p>   
+   1. External/Outside Survey - careful conduct of inspection to the burned building.
+  </p>
+ 
+  <p>
+    2. Internal/Inside Survey - enter the building to correlate the same with the outside survey of the structure in question.
+  </p>
+
+  <p>
+   3. the point of Locate origin of fire, the ceiling area must be checked first.
+  </p>
+
+  <p>
+   Aligatoring Pattern- a charring on wood that resembles alligators skin,characterized be deep,wwide cracks, and can indicate high-intensity and long-duration fires.
+  </p>
+
+  <p>
+   V-Fire Pattterns - a common characteristics of fire spread,forming a V-shape due to the fire burning upwards and outwards.
+  </p>
+  
+  <p>
+   4.Look for Prima Facie Evidence of Arson
+  </p>   
+
+  
+   <li>F. Entering the Building:</li>  
+   <p>When entering the building, the investigator should observe the following:</p>  
+   <p>1.Observe the condition of doors and windows, was force used?</p>    
+   <p>2.Notice whether the premises has been burned and the possible point of ignition, entry</p>    
+   <p>3.Note any material transported from the building content</p>   
+   <p>4.Study the condition of stocks, new expensive stocks have been removed, substituted by second hand or old stocks.</p>   
+  
+
+  
+   <li>Guidelines in the Investigation of Arson</li>   
+   <li>I. Arrival and Observation</li>   
+   <li>Arrival</li>   
+   <liCharacteristics of vehicle leaving the area</li>    
+   <li>Unusual movement of condition</li>    
+   <li>Barricade slowing the progress of response</li>    
+   <li>Vehicle parked in such a manner to arouse observation in the fire scene</li>    
+    
+ 
+  
+   <li>Observation</li>   
+   <li>Identify the person who called the fire department</li>   
+   <li>Locate the fire and direction of the fire</li>   
+   <li>Was the fire burning in or on the business hour?</li>   
+   <li>Condition of traffic in the area</li>    
+  
+
+  
+   <li>II. The Fire Scene and Protecting the Fire Scene</li>   
+   
+
+
+   <li>Cooperation of the Firemen and the police</li>    
+   <li>Assignment of Guards</li>    
+   <li>Mechanics of Search</li>    
+   <li>Planning</li>   
+   <li>Sifting of the Debris</li>   
+   <li>Location of the point of origin of the fire</li>    
+   <li>General Rules/Step’s</li>   
+   <li>Collecting and Preserving of Evidence</li> 
+   <li>Photography</li> 
+   <li>Sketching</li>  
+   <li>Assistance of Qualified Experts</li>  
+   <li>Handling of Physical Evidence</li>  
+   <li>Forwarding of Physical Evidence</li>  
+   
+
+  
+   <li>III. Post Investigation</li>   
+   
+  <p>
+    • Methods that may be used by investigators are the processing of the fire scene and distinguishing between accidental and incendiary fire. 
+  </p>
+  <p>
+    • The Fire Investigation Report is the final written results of taking notes, recording observations and interviewing witnesses. 
+  </p>
+
+  <p>
+    Inventory of Evidence
+  </p>
+  <p>
+    The fire scene evidence may be collected and marked for identification purpose. 
+   </p>
+  <p> 
+    It should be preserved for some form of examination necessary to prove liability or the guilt of the suspect by examining some point of identity.
+  </p>
+
+  
+   <h2>Lesson 2: STANDARD OPERATING PROCEDURE IN FIRE AND ARSON INVESTIGATIONS</h2>
+   
+
+
+   <h2>Lesson 3. IMPORTANT PERSONALITIES OF FIRE AND THEIR INTENTIONS</h2>
+   
+   <p>
+    JOHN WALKER — an English Pharmacist who invented the first match in 1827.
+  </p>
+
+  <p>
+   ANTOINE LAVOISIER — French Chemist who proved in 1777 that burning is the result of the rapid union of oxygen with other substances. 
+   His theory of combustion and flame has been described as the "most important single contribution of the century". He has been referred to as the
+   "Father of Modern Chemistry".
+  </p>
+  
+  <p>
+   THOMAS ALVA EDISON — An American inventor who was able to send current through a carbon filament until it glowed but did not burn up. 
+   Developed and perfected the first electric light.
+  </p>
+
+  <p>
+   WILLIAM M. HANSSEN JR. — Developed a theory as to how fire develops from the incipient stage to flashover, called the "TETRAHEDRON OF FIRE"
+   which considers the four components necessary to support a fire:
+  </p>
+
+   <li>1.Fuel</li>  
+   <li>2.Heat</li>  
+   <li>3.Oxygen</li> 
+   <li>4.Chemical Chain Reaction</li>  
+  
+
+  <p>
+   WILLFRED M. STEIKEL — noted that there are three types of fire setters whose acts have been sexual root and may be found among pyromaniacs.
+  </p> 
+
+  <p>
+   1. Those who are sexually excited by watching fires.
+  </p>
+
+  <p>
+   2. Those who may be sexually excited by lighting fires during a period of intense sexual excitement. 
+ </p> 
+
+  <p>
+    3. Those who are sexually excited by watching, setting fires as a total sexual substitute, to the fire setter from an unbearable sexual urge. 
+    COMFORD, J.V. and BIRKLY, M. — introduced a method for the measurement of smoke and HCl evolution from PVC (Vinyl Chloride).
+ </p>
+  
+  <p>
+   PAUL B. WESTON and KENNETH M. WELLS — Authored criminal investigation about Arson cases. They observed that in arson cases the victim or subject of both may sustain fire injuries. Such injuries should be recorded by photography if possible, and must be verified by a medical examinations and diagnosis.
+  </p>
+  
+  <p>
+  JACK ALLEN WATSON — Co-inventor of the Hurst tool (Jaws of Life), a hydraulic rescue tool used to extricate victims trapped in a vehicular accident.
+  </p>
+
+  
+   <h2>LESSON 4: HISTORICAL AND SCIENTIFIC BACKGROUND OF FIRE</h2>
+  
+
+  <p>
+   Early humans used fire to warm themselves, cook food, and frighten away predators, enabling them to help their ancestors to travel out of Africa and colonize many regions of the world. Fire thus helped shape human society.
+  </p>
+
+  <p>
+   As early civilizations developed, people discovered more uses of fire. They used fire to provide light, to make tools and weapons, and as a weapon of war. Early religions often involved fire rituals to honor the flames, emphasizing the importance of fire in society. These rituals focused on fire’s power that stemmed from the story of Vesta, the Roman goddess of the hearth.
+  </p>
+
+  <p>
+   In honor, Vesta, the high priest in the Roman religion periodically chose the priestesses called Vestal Virgins, to keep the fire in a community’s hearth burning, symbolizing a fire, especially a central fire in communal life. Before the invention of modern implements starting a fire, especially by several means, usually required time and labor to produce sufficient friction to ignite a fire.
+  </p>
+
+  <p>
+   Today, people mostly focus not on starting fires but on using fire productivity and on preventing or extinguishing unwanted fires. We use fire to cook our food, to heat our homes, and to power plants that produce electricity. At the same time, fire remains a potentially destructive force in people’s lives.
+  </p>
+
+   <h2>EARLY USE OF FIRE</h2>
+
+  <p>
+   The earliest use of fire by humans may have occurred as early as 1.4 million years ago. Evidence for the human use of fire by Homo erectus beginning some 400,000 years ago has wide scholarly support. Claims for the earliest definitive evidence of control of fire by a member of Homo range from 1.7 to 2.0 million years ago. Evidence for the controlled use of fire by Homo erectus beginning some 400,000 years ago has wide scholarly support, with claims of earlier evidence being increasingly scrutinized. Hearth have been found in China and Southeast Asia dated to around 400,000 years ago. At this time it is not possible to be certain that all of the burned material is the result of human action, or natural fires.
+  </p>
+
+  <p>
+   The use of fire became relatively common in the Paleolithic period, 50,000 to 10,000 years ago. By this time, Neanderthals and anatomically modern Homo sapiens had evolved and existed alongside each other in several areas of Eurasia. Use of fire has been attested at dozens of Neanderthal sites. The earliest evidence for advanced fire technology dates to approximately 50,000 to 100,000 years ago. Clear indications of hearths have been found in Israel dating to between 200,000 and 700,000 years ago.
+  </p>
+
+  <p>
+   Sometimes after people began to use fire for tools, they found that by rubbing together pieces of flint they could produce sparks that would set fire to wood shavings. Evidence has shown that people used pieces of flint and iron to produce sparks for fire 2,500 to 3,000 years ago.
+  </p>
+
+  <p>
+  EARLY FIRE-MAKING TECHNIQUE  Early people also learned to make fires by rubbing together pieces of wood until the wood produced a glowing spark that could be used to ignite tinder. Evidence of this has been found in many cultures. One of the most common ways of making fire was the bow drill. It consisted of a block of wood and a stick that was fixed to an animal string of a small curved bow. The motion rotated the stick rapidly against the wood block, creating friction between the end of the stick and the block of wood. The friction produced a glowing wood powder that could be fanned into a flame and used to light fire.
+  Early people of South Eastern Asia practiced another way. They used a wooden piston to compress air inside a bamboo tube that contained wood shavings. The compressed air became increasingly hotter, eventually igniting the shavings.
+  </p>
+
+   <p>
+   FIRE AND THE ADVANCE OF CIVILIZATION!
+  As early people began to live in larger communities and to develop more advanced technologies, fire became a central part of their lives. 
+  Fire continues to be essential to humans today, although its presence may be hidden in gas-fired ovens and furnaces and thus less noticeable than before.
+  </p>
+
+  <p>
+   Prehistoric Uses of Fire
+   Thousands of years ago, hunter-gatherers (people who lived by hunting and gathering wild foods instead of raising domesticated crops and animals)
+   used fire for light and to cook. They could remain active after dark, could scare away dangerous wild animals, warm themselves, and make better tools.
+   In treeless areas, humans formed fires from peat. They used the fire to harden tools made of green wood, charred each into a point. 
+   They used the ash to whiten skins, and plowing up fresh wood. Fire eventually learned to control the spread of fire by blowing air through pipes.
+   They then used this technique to burn hollows in logs to create canoes, bowls, and canoes.
+  </p>
+
+  <h2>Fires in Early Civilization</h2>
+
+  <p>   
+   When prehistoric people developed the ability to cultivate crops and tame animals, they began to form permanent communities.
+   These communities amassed surpluses, enabling some people to devote their time to becoming skilled artisans. The artisans that used fire to make pottery, bricks, 
+   and metals, improved around 6000 B.C. in the present-day region of northern Iraq and eastern Syria. They heated copper ore and later iron ore in furnaces to 
+   produce metal tools and weapons. People learned to bake bricks by firing clay, and the early Mesopotamians produced extremely durable pottery.
+  </p>
+
+  <p>
+   CHEMISTRY OF FIRE:
+   The results from a rapid chemical reaction between a fuel — such as wood, gasoline, and oxygen — and the wind combine to give the oxidation reaction that produces 
+   fire. Combustion generates light, heat, flame, and soot.
+  </p>
+
+  <p>
+   How Combustion Occurs
+   Several important factors need to be present for combustion to occur. The first requirements are fuel and oxygen. 
+   The fire may range from trees in a forest, gasoline in an automobile. The oxygen is usually from the air in the
+   surrounding air. The next requirement for combustion is an ignition source. The ignition source may be in the 
+   form of a spark, a flame, or intense heat from a source of ignition. The ignition source must provide enough energy
+   to start the chemical reaction. Finally, a chemical chain reaction (reaction that continually feeds itself) must occur
+   between the fuel and oxygen for combustion to take place.
+  </p>
+
+</ul>
+
+<h3>Finals</h3>
+
+    <h2>LESSON I. THE DIFFERENT TERMS PRESENTED IN THE LESSON</h2>
+
+   <p>
+     1. Adapter – it is the device used for making a connection when threads do not match or when they are different in sizes. 
+   </p> 
+   <p> 
+    2. Aerial platform apparatus – it is a mechanically raised platform mounted on fire apparatus and designed for rescue and firefighting service.  
+   </p>
+   <p>
+    3. Arson – it refers to the crime of intentionally setting fire to a building or other property. The willful and malicious burning of the property of another.  
+   </p>
+   <p>
+     4. Atmospheric pressure – the weight of air or atmosphere. Normally at sea level is approximately 100kpa (14.5 psi).  
+   </p>
+   <p>
+     5. Attack – it is the actual physical fire fighting operation utilizing available manpower and equipment. The implementation of tactical plans on the fire ground in an aggressive manner.  
+   </p>
+   <p>
+     6. Atoms – these are the smallest particles of elements that take part in a chemical reaction.  
+   </p>
+   <p>
+     7. Backdraft – a sudden influx of oxygen causing combustion to restart possibly at devastating speeds consistent with an explosion.  
+   </p>
+   <p>
+     8. Beam – it is the main structural member of a ladder supporting the rungs or rung block.  
+   </p>
+   <p>
+     9. Bed ladder – it is the lowest section of an extension ladder into which the upper section or fly ladder retracts.  
+   </p>
+   <p>
+    10. Behavior – It is a manner or action of a substance, or organism.  
+   </p>
+   <p>
+    11. Cartridge-operated extinguisher – A 2 1/2 gallon extinguisher that uses a cylinder of carbon dioxide gas as the expelling agent. It is used to turn over and dropped on its "head" a pin breaks the seal on the carbon dioxide cylinder and release the gas.  
+   </p>
+   <p>
+    12. Chemistry – It is the science that deals with the study of matter which treats of the structure, composition, and properties of substances and of the transformations which they undergo. 
+   </p>
+   <p>   
+    13. Chemical Chain Reaction – An initial burning process wherein vapors or gases are released from flammable materials. Atoms and molecules are released from these vapors and combine with other radicals to form new compounds. 
+    </p>
+    <p>
+    14. Combustion – It is a chemical reaction caused by oxidation that produces heat and light. The production of light in the combustion process is the difference between oxidation and combustion: Oxidation, regardless of slowness, will give off heat but no light will be produced. 
+   </p>
+   <p>
+   15. Combustible – A material or structure that ignites and burns at temperatures ordinarily encountered at fires: a material that, when heated, gives off vapors that in the presence of oxygen (air) may be oxidized and consumed by fire.  
+   </p>
+   <p>
+   16. Conduction – The transfer of heat from one body to another by direct contact (electric stove electrode to utensil), within the same body (metal rod heated at one end), or through another heat-conducting medium (double boiler).  
+   </p>
+   <p>
+   17. Conflagration – Fire that extends over a large area, crossing natural or artificially created barriers in the process, and that destroys many buildings. 
+   </p>
+   <p> 
+   18. Convection – It is the transfer of heat by circulation of heated currents of liquids and gases. 
+   </p>
+   <p>
+   19. Dry Chemical – A type of extinguishing agent suitable for use on flammable liquids and electrical fires.  
+   </p>
+   <p>
+   20. Dry Powder – Type of extinguishing agent intended for use on combustible metals.  
+  </p>
+   <p>
+   21. Excessive heat – Temperatures, generally in excess of 150°C (300°F) that tend to vaporise exposed fuels and enable fires to spread.  
+   </p>
+   <p>
+   22. Exposure – Property that may be endangered by fire in another structure or by an outside fire (within 12 m or 40 feet). 
+   </p>
+   <p>
+   23. Extension ladder – A ladder of two or more sections that may be extended to various heights.
+   </p>
+   <p>
+   24. Extension of fire - The spread of fire usually during the course of firefighting operations, to areas not previously involved or affected; an extension of fire through open partitions into an attic, or extension through openings to another room or building.
+  </p>
+   <p>
+   25. Fire - It is the rapid oxidation of combustible materials accompanied by the released of energy in the form of heat and light. 
+   </p>
+   <p>
+   26. Fire Behavior - It is the manner in which fuel ignites, flame develops, and fire spreads. Sometimes used to distinguish characteristics of one particular fire from typical fire characteristics.
+   </p>
+   <p>
+   27. Fire confinement - The stage of firefighting when there is no more possibility of fire extension. 
+   </p>
+   <p>
+   28. Fire control - The stage of firefighting when the fire is no longer spreading and eventual extinguishment is certain. 
+   </p>
+   <p>
+   29. Firefighting tactics - Methods of employing fire fighters in combating fire in an efficient, coordinated manner in the field so as to get satisfactory results.
+   </p>
+   <p>
+   30. Fire Door - A specially constructed, tested, and approved door installed for the purpose of preventing the spread of the fire. 
+   </p>
+   <p>
+   31. Fire Hazards - Conditions that are conducive to fire or are likely to increase the extent or severity of fire. 
+   </p>
+   <p>
+   32. Fire Point - The temperature at which a liquid fuel will produce sufficient vapors to support continuous combustion once ignited.
+  </p>
+   <p>
+   33. Fire Prevention - Fire protection activities that deal with preventing fires from starting by eliminating fire hazards through inspection and education programs.
+   </p>
+   <p>
+   34. Fire protection - a term that includes fire prevention, fire control, fire extinguishment, fire detection, and fire investigation.
+   </p>
+   <p>
+   35. Fire resistance - A measure of the ability of a material to keep from burning. 
+   </p>
+   <p>
+   36. Fire Report - The official report of a fire, generally prepared by the person in-charge of the fire incident. 
+  </p>
+   <p>
+   37. Fire Resistive - Material and design of building construction meant to withstand the maximum effect of fire for a specific duration or period of time. 
+  </p>
+   <p>
+   38. Firestorm - An intense conflagration during which rising heated air creates a vacuum beneath that surrounding air rushes to fill, forming extremely strong winds.
+  </p>
+   <p> 
+   39. Fire stream - A stream of water of suitable shape and velocity, directed from a nozzle and effective for the control of fires. 
+  </p>
+   <p>
+   40. Fire Triangle - A plane geometric figure in which the three sides of an equilateral triangle represent oxygen, heat, and fuel, these elements are necessary to sustain combustion.
+  </p>
+   <p>
+   41. Fire Tetrahedron - A four-sided, solid geometric figure that resembles a pyramid, with one of the sides forming the base. Each side indicates one of the four elements required to have fire. 
+  </p>
+   <p>
+   42. Fire Wall - A fire resistant wall built to stop the spread of fire through a building.
+  </p>
+   <p> 
+   43. Flashover - This is the stage of fire in which a room or other confined area becomes heated to the point that flames will sweep or flash over the entire surface of the area.
+  </p>
+   <p> 
+   44. Flash Point - The minimum temperature at which a liquid fuel gives off sufficient vapors to form an ignitable mixture with the air near the surface. At this temperature, the ignited vapors will flash but will not continue to burn.
+  </p>
+   <p> 
+   45. Flame spread - The rate or speed at which flame travels/spreads over the surface of a material.
+  </p> 
+  <p>
+   46. Fly - The upper section of an extension or aerial ladder. 
+  </p>
+   <p> 
+   47. Foam - An extinguishing agent formed by mixing a foam-producing compound with water. 
+  </p>
+   <p>
+   48. Free Burning - The second phase of burning in which materials or structures are burning in the presence of adequate oxygen. 
+  </p>
+   <p>
+   49. Gated Wyes - A hose appliance that has one female inlet and two or more male outlets with a gate valve on each of the male outlets.
+   </p>
+   <p>
+   50. Gate valve - A control valve used to shut off or turn on water in a water system. Gallons per minute, a measure used of the rate of water flow. The metric equivalent is liters per minute; one equals 3.78. In firefighting these are used to express the output of pumpers, hose streams, hydrants, and so forth. 
+  </p>
+   <p> 
+   51. Halon Halogenated - extinguishing agent extinguishes fires by inhibiting or interrupting the chemical reaction of fuel ans oxygen.
+  </p>
+   <p>
+   52. Handline- A small hose lines that can be handled and manuevered without mechanical assistance.
+  </p>
+   <p>
+   53. Heat Transfer- The movement and dispersion of heat by conduction,radiation, or convection.
+  </p>
+   <p> 
+   54. Hose Clamps- A mechanical device used for compressing fire hose to stop the floe of water. 
+  </p>
+  <p>
+   55. Hose line - One length or a series of connected lengths of hose.  
+  </p>
+   <p> 
+   56. Hydrant - A valved outlet on a water system with one or more threaded outlets, installed to provide fire department hose connections to supply water to pumpers or fire lines.  
+  </p>
+   <p> 
+   57. Hydrant Wrench - A specially designed tool used to open or close a hydrant and to remove hydrant caps.  
+  </p>
+   <p>
+   58. Ignition Temperature - It is the degree of heat necessary to ignite flammable vapors. This temperature can come from an external source; or if the fuel itself rose to this temperature, auto-ignition (self-ignition) will occur.  
+  </p>
+   <p> 
+   59. Incipient Stage - A fire in its beginning stage that can be controlled or extinguished using a portable fire extinguisher.  
+  </p>
+  <p> 
+   60. Jaws of Life - A hydraulic rescue tool used to remove the doors, window grills from a damage building, vehicle, allowing access to trap victims to be rescued.  
+  </p>
+   <p> 
+   61. Nozzle - A device attached to a hose or appliance to restrict the area of flow, thus increasing the velocity of the water and forming a stream that will be effective in reaching and controlling the fire.  
+  </p>
+   <p>
+   62. Overhaul - A late stage of the fire extinguishing process during which the areas involved are carefully checked for any remaining trace of fire or embers.  
+  </p>
+   <p> 
+   63. Oxygen - A gas present in the earth's atmosphere in about 21 % concentration that is an important part of the fire triangle.  
+  </p>
+   <p> 
+   64. Pawl - The part of the mechanism of an extension ladder that secures the extensions to the rungs of the main ladder.  
+  </p>
+   <p> 
+  65. Phases of Fire - A degree of flame progression or the stages of fire: Phase I, fire in incipient stage and beginning to grow; Phase II, free-burning, flame propagation is at its greatest; Phase III, oxygen is deficient in the burn area, producing a smoldering phase.  
+  </p>  
+  <p>
+   66. Physics - It is the science that deals with the study of matter and energy and their mutual interactions.  
+  </p>
+   <p> 
+   67. Plant - A mechanical, electrical, or chemical device used by an arsonist to start an incendiary fire.  
+  </p>
+   <p>
+   68. Pre - Fire Planning - It is an advance planning of possible firefighting operations by the fire department in a particular building or group of buildings; survey of special hazards and plans for possible firefighting operations.  
+   </p>
+   <p>
+   69. Products of Combustion - Materials given off or released during the burning process.  
+  </p>
+  <p>
+   70. Radiation Heat - The transmission of heat through the medium of heat rays or heat waves.  
+  </p>
+   <p>
+   71. Rescue - The saving of life and removal of endangered persons to a place of safety.  
+   </p>
+   <p>
+   72. Rollover - An eruption of flames following the ignition of gas that has collected at the top of an enclosed space or structure.  
+  </p>
+   <p>
+   73. Rope Hose Tool - A piece of rope spliced to form a loop through the eye of a metal hook. It is used for securing hose to ladders or other objects.  
+  </p>
+   <p>
+   74. Salvage - Procedure to reduce incidental losses from smoke, water, fire, or weather during and following fires.  
+  </p>
+   <p> 
+   75. Salvage cover - A large waterproof canvas or other material used to cover contents of a burning building to avoid water damage.  
+  </p>
+
+  <p>
+   76. Seat of fire - Area where the main body of fire is located as determined by the outward movement of heat and gases.  
+  </p>
+   <p>  
+   77. Siamese - A hose appliance that has two or more female inlets and one male outlet.  
+  </p>
+   <p> 
+   78. Size - up - The mental evaluation made by the officer in charge in order to determine the course of action.  
+  </p>
+   <p>
+   79. Science - It is any department of knowledge in which the results of investigation have been systematized in the form of hypotheses and general laws subject to verification.  
+  </p>
+   <p> 
+   80. Smoke - A combination of gases, including carbon dioxide, and other products of combustion that hinders respiration, obscures visibility, and delays access to the seat of the fire.  
+  </p>
+  <p>
+   81. Spanner Wrench - A tool used by firefighters for tightening or loosening couplings.  
+  </p>
+   <p>
+   82. Spontaneous heating (combustion) - A process that increases the temperature of a material without drawing heat from outside source. It heating continues until the ignition temperature is reached, spontaneous ignition occurs.  
+  </p>
+   <p> 
+   83. Standpipe - A vertical water pipe riser used to supply water for fire fighting in buildings.  
+  </p>
+   <p> 
+   84. Strategy - The overall method and plan for controlling an outbreak of fire with the most advantageous use of available forces.  
+  </p>
+   <p> 
+  85. Suppression - The total operation of extinguishing a fire from the time of discovery.
+  </p>
+  <p>
+   86. Tactics- Methods of employing fire fighters and companies in an efficient, coordinated manner in the field to get satisfactory results with the forces employed and to deny the fire any potential avenue of extension.
+  </p>
+   <p>
+   87. Trailer- An arson material such as cloth or paper to increase the spread of fire. 
+  </p>
+
+   <h2>LESSON 2. FIRE CODE TAXES, FEES/CHARGES AND FINES</h2>
+
+  <p>
+   The Fire Code of the Philippines (RA 9514) mandates the Bureau of Fire Protection (BFP) to collect taxes, fees, and fines to fund its operations and the modernization of fire services. A portion of these revenues is also allocated to local government units (LGUs) for their local fire stations.
+  </p>
+
+
+
+
+
+  <p>
+   The Fire Code of the Philippines (Republic Act No. 9514) outlines various penalties for violations, including administrative fines of up to ₱50,000, potential building closures, and in serious cases, criminal penalties like imprisonment. Specifically, fines can be issued for failing to comply with fire safety regulations, and willful non-compliance can lead to imprisonment of up to six years or a fine of up to ₱20,000.
+  </p>
+  
+
+
+ 
+  <p>
+   Fire Code taxes in the Philippines are levied to support fire safety measures and the Bureau of Fire Protection (BFP). They are categorized as Fire Code Realty Tax, Fire Code Construction Tax, and Fire Code Sales Tax.
+  </p>
+
+
+
+ <p> 
+   Rule 12 of the Revised Implementing Rules and Regulations (RIRR) of Republic Act (RA) 9514, the Fire Code of the Philippines, outlines provisions related to the fire safety inspections, fire safety construction, and the issuance of Fire Safety Inspection Certificate (FSIC). It also covers the assessment and collection of fire code fees and charges.
+  </p>
+
+
+
+  <p>
+   Fire Safety Inspection:  
+  </p>
+
+
+  <p>
+   Buildings and structures are inspected to ensure compliance with fire safety standards and the proper installation of fire protection systems.
+  <p>
+
+
+
+   <p>
+    A Fire Safety Inspection Certificate (FSIC) is issued after inspection, confirming that the required fire safety construction and protection systems are in place.
+   </p>
+
+
+
+   <p>
+    Fire Code Fees:  
+  </p>
+
+
+  <p>  
+    Fire Code fees, taxes, and charges are assessed and collected to support the Bureau of Fire Protection (BFP).
+   </p>
+
+
+
+    <p>
+     Penalties:  
+    </p>  
+ 
+
+   <p>
+     Violations of the Fire Code can result in penalties, including fines and suspension of business permits.
+   </p>
+
+
+
+    <p>
+      Fire Safety Plans:  
+    </p>
+   
+
+    <p> 
+      Building owners are responsible for submitting fire safety plans for review and approval by the BFP.
+    </p>
+
+
+   <p>
+     Hazardous Materials:  
+   <p>
+ 
+
+  </p>  
+     The rule also addresses the handling and storage of hazardous materials, including the prescription of maximum allowable quantities and the increasing of regulatory fees.
+   </p>
+
+  
+    
+   <h2>LESSON 3. FIRE SAFETY MEASURES, EMERGENCY, EVACUATION PLAN</h2>
+  
+
+   <p>
+    Fire safety measures involve both prevention and response to reduce the risk of fire and ensure a safe evacuation. Key actions include installing smoke alarms, developing escape plans, and practicing fire drills. Additional measures include proper electrical maintenance, safe storage of flammable materials, and regular inspections of heating equipment.
+   </p>
+
+   <p>FIRE SAFETY CHECKLIST FOR THE WORKPLACE</p>
+
+
+   <p>  
+    • Does your property have clear and accessible escape routes? 
+   </p>
+  <p> 
+    • Is fire fighting equipment available throughout the entire property? 
+   </p>
+  <p>
+    • Do you have a fully working, regularly tested fire alarm? 
+  </p>
+ <p> 
+    • Do you have a set of fire precautions advertised for your employees?
+   </p>
+
+   <p>
+    • Are your staff regularly trained in fire safety matters? 
+   </p>
+  <p> 
+    • Are all of your staff taken into consideration in your evacuation plans? 
+  </p>
+  <p>  
+    • Do you have a sectioned area for smokers on your premises? 
+  </p>
+  <p>  
+    • Are your fire extinguishers serviced and replaced on a regular basis? 
+  </p>
+ <p>  
+    • Are all of your electrical systems and appliances maintained and checked regularly? 
+  </p>
+
+   <h2>EMERGENCY EVACUATION PLAN</h2>
+
+   
+    <li>IN CASE OF FIRE</li>
+    <li>1.REPORT TO:</li>      <li>EXT No:</li>  
+    <li>or</li>  
+    <li>CELL No</li>  
+    
+   <p>
+    2. EVACUATE TO EMERGENCY EXIT’S IMMEDIATELY 3. DO NOT USE ELEVATORS 4. FOLLOW EVACUATION PROCEDURES 5. PROCEED TO YOUR ASSEMBLY POINT 
+   </p>
+
+   <li>FLOOR NUMBER: __</li>
+    
+
+   
+    <li>Floor plan labels:</li>  
+    <li>ENTRANCE</li>  
+    <li>WINDOW</li>  
+    <li>EMERGENCY EXIT</li>  
+    <li>SALES OFFICE</li>  
+    <li>EMERGENCY DOOR</li>  
+    <li>TOILETS RECEPTION</li>  
+    <li>BOARD ROOM</li>  
+    <li>STORE ROOM</li>  
+    <li>ADMIN OFFICES</li>
+   
+
+  
+   <li>FIRE EVACUATION PLAN</li>
+   <li>GROUND FLOOR</li>
+   <li>IF YOU DISCOVER A FIRE</li> 
+   
+
+   <li>REMOVE people from immediate danger and close doors behind you</li> 
+   <li>LEAVE the fire area</li> 
+   <li>ACTIVATE a fire alarm pull station</li> 
+   <li>PHONE 9-9-9 to report a fire at your address</li>  
+   <li>FIGHT the fire only if it is small and you are not alone</li> 
+   <li>EVACUATE via the nearest safe exit</li> 
+   <li>ASSIST others to reach a safe exit  IF YOU HEAR A FIRE ALARM...</li>  
+   <li>EVACUATE via the nearest safe exit</li>  
+   <li>CLOSE doors behind you</li> 
+   <li>ASSIST persons requiring assistance</li> 
+   <li>PHONE 9-9-9 to report a fire at your address</li> 
+   <li>PROCEED to the designated evacuation assembly area clear of the building and arriving fire apparatus • DO NOT re-enter the building for any reason until the "ALL Clear" has been given by the Fire Department</li> 
+   
+   <li>SYMBOL LEGEND (on the left side of the plan):</li> 
+   <li>Fire Extinguisher</li>  
+   <li>Manual Pull Station</li>  
+   <li>Exit</li>  
+   <li>Sprinkler Activation Device</li>  
+   <li>Sprinkler Riser</li>  
+   <li>Sprinkler System</li>  
+   <li>Elevator</li>  
+   <li>The floor map shows unit locations, exits, and a "YOU ARE HERE" marker.</li> 
+  </p>
+
+</section>
+
+<section id="trivia">
+
+<h2>Trivia</h2>
+
+<ul>
+
+  <li>Fire can double in size every 30 seconds.</li>
+  <li>Smoke inhalation is the leading cause of death in fires.</li>
+  <li>The Fire Triangle consists of heat, fuel, and oxygen.</li>
+  <li>Arson is a serious criminal offense.</li>
+  <li>Electrical faults are a common cause of fires.</li>
+  <li>Fire extinguishers are classified as A, B, C, D, and K.</li>
+  <li>Fire drills help people practice safe evacuation.</li>
+
+</ul>
+  
+</section>
+
+<section id="contact">
+
+<h2>CONTACT (STUDENTS INFORMATION)</h2>
+
+<p>Group Members:</p>
+<P>Course: Bachelor of Science in Criminology</p>
+
+<ul>
+  <li>Bea Claudine P. Bactol</li>
+  <li>Joshen M. Tagala</li>
+  <li>Jecel G. Nibla</li>
+  <li>Aisa G. Ebrahim</li>
+  <li>Jelyn T. Lariba</li>
+  <li>Junmark B. Siete</li>
+  <li>Verlyn B. Pabate</li>
+  <li>Jessa N. Camaongay</li>
+  <li>Laica O. Benigay</li>
+  <li>Laiza O. Benigay</li>
+  <li>Joseph Comaling</li>
+  <li>Irish Catherine Mugot</li>
+  <li>Maricris Cordova</li>
+</ul>
+
+  <p>Course: BS Criminology</p>
+  <p>Subject: Fire Protection and Arson Investigation</p>
+  <p>Instructor:</b>(Earnest Abbygail Campomanes)</p>
+  <p>School:</b>(Yllana Bay View College)</p>
+
+</section>
+
+<footer>
+  
+  <h2>References</h2>  
+ 
+  <p>
+    Dausan, A. F., & Liza Joy, B. (n.d.). *Fire technology and arson investigation: A practical guide for criminology instructors, students & fire prevention advocates.* Wiseman's Books Trading Inc.
+  </p>
+  
+  <p>
+   National Fire Protection Association. (2024). *NFPA 921: Guide for fire and explosion investigations* (2024 ed.). NFPA. https://www.nfpa.org/product/nfpa-921-guide/p0921code
+  </p>
+  
+  <p>
+   National Fire Protection Association. (2018). *NFPA 101: Life safety code.* NFPA. https://www.nfpa.org
+  </p>
+  
+  <p>
+   National Institute of Standards and Technology. (n.d.). *Fire investigation handbook.* U.S. Department of Commerce. https://nvlpubs.nist.gov/nistpubs/Legacy/hb/nbshandbook134.pdf
+  </p>
+ 
+  <p>
+   Pijano, C. C. (n.d.). *CDI 6 – Fire protection and arson investigation.* College of Criminology.
+  </p>
+ 
+  <p>
+   Redsicker, D. R., & O'Connor, J. J. (1997). *Practical fire and arson investigation* (2nd ed.). CRC Press.
+  </p>
+  
+  <p>
+   Republic of the Philippines. (1979). *Presidential Decree No. 1613: Amending the law on arson.* Malacañang, Manila. https://lawphil.net/statutes/presdecs/pd1979/pd_1613_1979.html
+  </p>
+  
+  <p>
+   Republic of the Philippines. (2008). *Republic Act No. 9514: The Fire Code of the Philippines of 2008.* Official Gazette. https://www.officialgazette.gov.ph/2008/12/19/republic-act-no-9514/
+  </p>
+  
+  <p> 
+   Republic of the Philippines, Bureau of Fire Protection. (2019). *Revised implementing rules and regulations (RIRR) of RA 9514: The Fire Code of the Philippines.* BFP. https://bfp.gov.ph/revised-irr-of-ra-9514-the-fire-code-of-the-philippines/
+  </p>
+ 
+  <p>
+   Republic of the Philippines. (1930, as amended). *Revised Penal Code of the Philippines (Act No. 3815), Articles 320–326-B: Arson and other crimes involving destruction.* Congress of the Philippines.
+  </p>
+
+</footer>
+          <h2>THANK YOU FOR VISITING OUR WEBSITE</h2>
+</body>
+</html> </p>
+        © 2026 Fire Protection and Arson Investigation
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2026 Fire Protection and Arson Investigation Website</span> &mdash; All Rights Reserved
+  </footer>
+
+  <script>
+    function openModal() {
+      document.getElementById('modalOverlay').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    function closeModalOutside(e) {
+      if (e.target === document.getElementById('modalOverlay')) closeModal();
+    }
+    function makeEditable(el) {
+      el.setAttribute('contenteditable', 'true');
+      el.focus();
+      el.addEventListener('blur', () => {
+        el.removeAttribute('contenteditable');
+      }, { once: true });
+    }
+  </script>
+</body>
+</html>
